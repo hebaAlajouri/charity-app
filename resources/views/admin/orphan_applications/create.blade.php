@@ -4,7 +4,7 @@
 <div class="container mx-auto py-8">
     <h1 class="text-2xl font-bold mb-6">إنشاء طلب كفالة يتيم</h1>
 
-    <form action="{{ route('orphan_applications.store') }}" method="POST"class="edit-form">
+    <form action="{{ route('admin.orphan_applications.store') }}" method="POST"class="edit-form">
         @csrf
 
         <div class="bg-white p-6 rounded shadow space-y-6">

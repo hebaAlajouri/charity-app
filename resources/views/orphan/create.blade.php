@@ -22,7 +22,7 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('orphan_applications.store') }}" class="bg-white p-6 rounded-lg shadow-lg space-y-6">
+        <form method="POST" action="{{ route('orphan.store') }}" class="bg-white p-6 rounded-lg shadow-lg space-y-6">
             @csrf
 
             <h2 class="text-2xl font-bold text-red-600">بيانات ولي الأمر</h2>

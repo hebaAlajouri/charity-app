@@ -4,7 +4,7 @@
 <div class="container mx-auto px-4 sm:px-8">
     <div class="py-8">
         <h2 class="text-2xl font-semibold leading-tight text-gray-800 mb-4">طلبات كفالة الأيتام</h2>
-        <a href="{{ route('orphan_applications.create') }}" class="btn-login mb-4 inline-block">إضافة طلب جديد</a>
+        <a href="{{ route('admin.orphan_applications.create') }}" class="btn-login mb-4 inline-block">إضافة طلب جديد</a>
 
         <!-- ✅ overflow for responsiveness -->
         <div class="overflow-x-auto w-full">
@@ -44,9 +44,9 @@
                             <td class="py-2 px-4 border">
                                 <!-- ✅ wrap buttons properly -->
                                 <div class="flex flex-wrap justify-center gap-2">
-                                    <a href="{{ route('orphan_applications.show', $application->id) }}" class="btn-action btn-show">عرض</a>
-                                    <a href="{{ route('orphan_applications.edit', $application->id) }}" class="btn-action btn-edit">تعديل</a>
-                                    <form action="{{ route('orphan_applications.destroy', $application->id) }}" method="POST" onsubmit="return confirm('هل أنت متأكد من الحذف؟');">
+                                    <a href="{{ route('admin.orphan_applications.show', $application->id) }}" class="btn-action btn-show">عرض</a>
+                                    <a href="{{ route('admin.orphan_applications.edit', $application->id) }}" class="btn-action btn-edit">تعديل</a>
+                                    <form action="{{ route('admin.orphan_applications.destroy', $application->id) }}" method="POST" onsubmit="return confirm('هل أنت متأكد من الحذف؟');">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn-action btn-delete">حذف</button>
