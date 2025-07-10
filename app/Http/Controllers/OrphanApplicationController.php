@@ -9,7 +9,7 @@ class OrphanApplicationController extends Controller
 {
     public function create()
     {
-        return view('orphan_application.create');
+        return view('orphan.create');
     }
 
     public function store(Request $request)

@@ -21,7 +21,7 @@
     <tbody>
         @foreach($news as $index => $n)
         <tr class="border-t hover:bg-gray-50">
-            <td class="p-2 text-center">{{ $news->firstItem() + $index }}</td>
+            <td class="p-2 text-center">{{ $index + 1 }}</td>
             <td class="p-2">{{ $n->title }}</td>
             <td class="p-2">
                 @if($n->image)
@@ -42,8 +42,4 @@
         @endforeach
     </tbody>
 </table>
-
-<div class="mt-4">
-    {{ $news->links() }}
-</div>
 @endsection

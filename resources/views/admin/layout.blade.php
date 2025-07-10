@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>لوحة التحكم</title>
+        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
     <style>
   * {
     margin: 0;
@@ -812,7 +813,7 @@ img.show-img {
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <h2>نظام الإدارة</h2>
-        </div>1
+        </div>
         <div class="sidebar-nav">
             <div class="nav-item"><a href="/admin/dashboard" class="nav-link">الرئيسية</a></div>
             <div class="nav-item"><a href="/admin/users" class="nav-link">المستخدمين</a></div>
@@ -828,20 +829,22 @@ img.show-img {
     </nav>
 
     <div class="main-content">
-        <header class="main-header">
-            <div class="header-left">
-                <button class="menu-toggle" id="menuToggle">☰</button>
-                <h1 class="page-title">@yield('title', 'لوحة التحكم')</h1>
-            </div>
-            <div class="header-right">
-                <div class="user-info">
-                    <span>مرحباً، مدير</span>
-                </div>
-                <form method="POST" action="#">
-                    <button type="submit" class="logout-btn">تسجيل الخروج</button>
-                </form>
-            </div>
-        </header>
+       <header class="main-header">
+    <div class="header-left">
+        <button class="menu-toggle" id="menuToggle">☰</button>
+        <h1 class="page-title">@yield('title', 'لوحة التحكم')</h1>
+    </div>
+    <div class="header-right">
+        <div class="user-info">
+            <span>مرحباً، مدير</span>
+        </div>
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit" class="logout-btn">تسجيل الخروج</button>
+        </form>
+    </div>
+</header>
+
 
         <main class="content-area">
             <div class="content-wrapper">

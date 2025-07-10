@@ -197,10 +197,7 @@
         }
     </style>
 
-    <!-- Floating Help Button -->
-    <div class="floating-help" onclick="showHelp()">
-        <i class="fas fa-question"></i>
-    </div>
+    
 
     <!-- Hero -->
    

@@ -10,7 +10,7 @@ class AdminReportController extends Controller
 {
     public function index()
     {
-        $reports = Report::orderBy('published_at', 'desc')->paginate(10);
+        $reports = Report::orderBy('published_at', 'desc')->get();
         return view('admin.reports.index', compact('reports'));
     }
 

@@ -24,7 +24,7 @@
     <tbody>
         @foreach($users as $user)
         <tr class="border-t text-center">
-            <td class="p-2">{{ $user->id }}</td>
+            <td class="p-2">{{ $loop->iteration }}</td>
             <td class="p-2">{{ $user->name }}</td>
             <td class="p-2">{{ $user->email }}</td>
             <td class="p-2">{{ $user->role }}</td>
@@ -40,8 +40,4 @@
         @endforeach
     </tbody>
 </table>
-
-<div class="mt-4">
-    {{ $users->links() }}
-</div>
 @endsection

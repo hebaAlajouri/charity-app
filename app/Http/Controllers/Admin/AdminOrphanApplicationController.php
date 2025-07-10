@@ -9,7 +9,7 @@ class AdminOrphanApplicationController extends Controller
 {
     public function index()
     {
-        $applications = OrphanApplication::latest()->paginate(10);
+        $applications = OrphanApplication::latest()->get();
         return view('admin.orphan_applications.index', compact('applications'));
     }
 

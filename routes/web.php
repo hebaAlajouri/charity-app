@@ -106,8 +106,8 @@ Route::middleware('auth')->group(function () {
     // If you want to restrict donation to logged in users only
 });
 
-Route::get('/orphan-application', [OrphanApplicationController::class, 'create'])->name('orphan_application.create');
-Route::post('/orphan-application', [OrphanApplicationController::class, 'store'])->name('orphan_application.store');
+Route::get('/orphan-application', [OrphanApplicationController::class, 'create'])->name('orphan.create');
+Route::post('/orphan-application', [OrphanApplicationController::class, 'store'])->name('orphan.store');
 Route::get('/orphans/{id}', [ViewOrphanController::class, 'show'])->name('orphans.show');
 Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::resource('orphan_applications', AdminOrphanApplicationController::class);

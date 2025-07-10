@@ -8,10 +8,11 @@ use Illuminate\Http\Request;
 class AdminJobController extends Controller
 {
     public function index()
-    {
-        $jobs = Job::orderBy('created_at', 'desc')->paginate(10);
-        return view('admin.jobs.index', compact('jobs'));
-    }
+{
+    $jobs = Job::orderBy('created_at', 'desc')->get();
+    return view('admin.jobs.index', compact('jobs'));
+}
+
 
     public function create()
     {

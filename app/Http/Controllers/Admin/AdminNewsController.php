@@ -10,7 +10,7 @@ class AdminNewsController extends Controller
 {
     public function index()
     {
-        $news = News::latest()->paginate(10);
+        $news = News::latest()->get();
         return view('admin.news.index', compact('news'));
     }
 

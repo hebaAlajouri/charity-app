@@ -19,7 +19,7 @@
             <li><a href="{{ route('reports.index') }}">تقارير</a></li>
             <li><a href="{{ route('contact.form') }}">تواصل</a></li>
             <li><a href="{{ route('news.index') }}">أخبار</a></li>
-            <li><a href="{{ route('orphan_application.create') }}">طلب استفادة</a></li>
+            <li><a href="{{ route('orphan.create') }}">طلب استفادة</a></li>
             
             @auth
                 @if(Auth::user()->role === 'admin')
@@ -73,7 +73,7 @@
             <li><a href="{{ route('reports.index') }}">تقارير</a></li>
             <li><a href="{{ route('contact.form') }}">تواصل</a></li>
             <li><a href="{{ route('news.index') }}">أخبار</a></li>
-            <li><a href="{{ route('orphan_applications.create') }}">طلب استفادة</a></li>
+            <li><a href="{{ route('orphan.create') }}">طلب استفادة</a></li>
 
             @auth
                 @if(Auth::user()->role === 'admin')

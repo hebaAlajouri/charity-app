@@ -57,7 +57,7 @@
             <li><a href="{{ route('reports.index') }}" class="hover:text-[#f39c12]">تقارير</a></li>
             <li><a href="{{ route('contact.form') }}" class="hover:text-[#f39c12]">تواصل</a></li>
             <li><a href="{{ route('news.index') }}"class="hover:text-[#f39c12]">أخبار</a></li>
-            <li><a href="{{ route('orphan_application.create') }}" class="hover:text-[#f39c12]">طلب استفادة</a></li>
+            <li><a href="{{ route('orphan.create') }}" class="hover:text-[#f39c12]">طلب استفادة</a></li>
                 </ul>
             </div>
 

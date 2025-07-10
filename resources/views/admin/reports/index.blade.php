@@ -23,7 +23,7 @@
     <tbody>
         @foreach($reports as $index => $report)
         <tr class="border-t hover:bg-gray-50">
-            <td class="p-2 text-center">{{ $reports->firstItem() + $index }}</td>
+            <td class="p-2 text-center">{{ $index + 1 }}</td>
             <td class="p-2">{{ $report->title }}</td>
             <td class="p-2">{{ $report->category ?? '-' }}</td>
             <td class="p-2">{{ $report->published_at ? $report->published_at->format('Y-m-d') : '-' }}</td>
@@ -46,8 +46,4 @@
         @endforeach
     </tbody>
 </table>
-
-<div class="mt-4">
-    {{ $reports->links() }}
-</div>
 @endsection
