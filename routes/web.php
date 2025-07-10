@@ -27,7 +27,7 @@ use App\Http\Controllers\Admin\AdminOrphanApplicationController;
 
 
 Route::get('/', [HomeController::class, 'showLandingPage'])
-    ->middleware(['auth', 'verified'])
+
     ->name('dashboard');
 
 
