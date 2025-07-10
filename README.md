@@ -6,3 +6,40 @@
 ------------------------------------------------------------------------------------------------------------
 الهدف من الموقع:
 يسهل هذا الموقع كفالة الايتام ودعمهم ماديا  ومعنويا وعرض ودعم حملات الاغاثةوحيث اصبح المستخدم قادر على التبرع من خلال ضغطة زر
+## التقنيات المستخدمة
+
+- Laravel (PHP Framework)
+- MySQL (قاعدة بيانات)
+- Blade (قوالب Laravel)
+- Bootstrap / Tailwind CSS (تصميم واجهة المستخدم)
+- JavaScript / AJAX (للتفاعل الديناميكي)
+- Git (لإدارة النسخ)
+
+## طريقة تشغيل المشروع محلياً
+
+1. **تثبيت المتطلبات:**
+
+   - تأكد من تثبيت PHP (نسخة 8 أو أحدث).
+   - تأكد من تثبيت Composer.
+   - تأكد من وجود MySQL أو أي قاعدة بيانات متوافقة
+
+   2. **نسخ المشروع:**
+
+   ```bash
+   git clone https://github.com/hebaAlajouri/charity-app.git
+   cd charity-app
+   code .
+   composer intall
+   cp .env.example .env
+   php artisan key:generate
+   php artisan migrate
+   php artisan serve
+   http://localhost:8000
+   npm install
+   npm run dev
+
+
+
+  Deployed by github at:
+   https://hebaalajouri.github.io/charity-app/
+
