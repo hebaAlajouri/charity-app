@@ -10,14 +10,21 @@ class AdminMessageController extends Controller
 {
     public function index()
     {
+        \App\Models\Message::where('is_read', false)->update(['is_read' => true]);
         $messages = Message::latest()->get();
         return view('admin.messages.index', compact('messages'));
     }
 
-    public function show(Message $message)
-    {
-        return view('admin.messages.show', compact('message'));
+  public function show(Message $message)
+{
+    if (!$message->is_read) {
+        $message->is_read = true;
+        $message->save();
     }
+
+    return view('admin.messages.show', compact('message'));
+}
+
 
     public function destroy(Message $message)
     {

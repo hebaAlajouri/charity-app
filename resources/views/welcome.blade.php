@@ -20,7 +20,7 @@
                 </a>
                 <a href="{{ route('projects') }}" class="btn-secondary">
                     <i class="fas fa-donate"></i>
-                    تبرع الآن
+                   ساهم الان
                 </a>
             </div>
         </div>
@@ -186,7 +186,7 @@
             </a>
             <a href="{{ route('projects') }}" class="btn-secondary">
                 <i class="fas fa-donate"></i>
-                تبرع الآن
+          ساهم الان
             </a>
         </div>
     </section>

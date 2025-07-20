@@ -8,17 +8,17 @@
             direction: rtl;
         }
         
-        /* Enhanced gradient backgrounds */
+        /* Enhanced gradient backgrounds with baby blue */
         .gradient-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #7EB6C1; , #7EB6C1 100%);
         }
         
         .gradient-indigo {
-            background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+            background: linear-gradient(135deg, #7EB6C1 0%, #7EB6C1 100%);
         }
         
-        .gradient-purple {
-            background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+        .gradient-baby-blue {
+            background: linear-gradient(135deg, #7EB6C1 0%, #87CEEB 100%);
         }
         
         /* Glass morphism effect */
@@ -35,7 +35,7 @@
         
         .card-hover:hover {
             transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(79, 70, 229, 0.15);
+            box-shadow: 0 20px 40px rgba(126, 182, 193, 0.15); /* baby blue shadow */
         }
         
         /* Custom scrollbar */
@@ -48,13 +48,13 @@
         }
         
         ::-webkit-scrollbar-thumb {
-            background: #4f46e5;
+            background: #7EB6C1;
             border-radius: 4px;
         }
         
-        /* Animated gradient text */
+        /* Animated gradient text - indigo to baby blue */
         .gradient-text {
-            background: linear-gradient(135deg, #4f46e5, #8b5cf6);
+            background: linear-gradient(135deg, #4f46e5, #7EB6C1);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -62,14 +62,16 @@
         
         /* Modern button styles */
         .btn-modern {
-            background: linear-gradient(45deg, #4f46e5, #6366f1);
+            background: linear-gradient(45deg, #4f46e5, #7EB6C1);
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+            box-shadow: 0 4px 15px rgba(126, 182, 193, 0.3);
+            border: none;
+            cursor: pointer;
         }
         
         .btn-modern:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(79, 70, 229, 0.4);
+            box-shadow: 0 8px 25px rgba(126, 182, 193, 0.4);
         }
         
         /* Floating animation */
@@ -102,13 +104,13 @@
             overflow: hidden;
         }
         
-        /* Enhanced shadows */
+        /* Enhanced shadows with baby blue */
         .shadow-indigo {
             box-shadow: 0 10px 30px rgba(79, 70, 229, 0.2);
         }
         
-        .shadow-purple {
-            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.2);
+        .shadow-baby-blue {
+            box-shadow: 0 10px 30px rgba(126, 182, 193, 0.2);
         }
         
         /* Modern card styles */
@@ -128,7 +130,17 @@
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(45deg, #4f46e5, #8b5cf6);
+            background: linear-gradient(45deg, #aaa6ffff, #7EB6C1);
+        }
+        
+        /* Icon background updated with indigo to baby blue */
+        .icon-gradient {
+            background: linear-gradient(to bottom right, #b8b5ffff, #7EB6C1) !important;
+        }
+        
+        /* Empty state with baby blue theme */
+        .empty-state-bg {
+            background: linear-gradient(135deg, #7EB6C1 0%, #87CEEB 100%);
         }
         
         /* Enhanced responsive design */
@@ -166,7 +178,7 @@
                 <div class="space-y-6">
                     @foreach($reports as $report)
                     <!-- Report Card -->
-                    <div class="modern-card card-hover shadow-indigo">
+                    <div class="modern-card card-hover shadow-baby-blue">
                         <div class="p-6">
                             <div class="flex items-start justify-between mb-4">
                                 <div class="flex-1">
@@ -183,7 +195,7 @@
                                     </div>
                                 </div>
                                 <div class="mr-4">
-                                    <div class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl">
+                                    <div class="w-16 h-16 icon-gradient rounded-full flex items-center justify-center text-white text-2xl">
                                         📊
                                     </div>
                                 </div>
@@ -213,11 +225,11 @@
                 @else
                 <!-- Empty State -->
                 <div class="text-center py-12">
-                    <div class="w-24 h-24 bg-gradient-to-br from-red-500 to-pink-600 rounded-full flex items-center justify-center text-white text-4xl mx-auto mb-6">
+                    <div class="w-24 h-24 empty-state-bg rounded-full flex items-center justify-center text-white text-4xl mx-auto mb-6">
                         📝
                     </div>
                     <h3 class="text-2xl font-semibold text-gray-700 mb-2">لا توجد تقارير متاحة حالياً</h3>
-                    <p class="text-red-500 text-lg">لا توجد تقارير متاحة حالياً.</p>
+                    <p class="text-lg" style="color: #7EB6C1;">لا توجد تقارير متاحة حالياً.</p>
                 </div>
                 @endif
             </div>

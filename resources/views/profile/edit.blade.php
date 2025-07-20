@@ -9,220 +9,192 @@
     </x-slot>
 
     <style>
-        body {
-            font-family: 'Tajawal', sans-serif;
-            direction: rtl;
-        }
+        :root {
+        --primary-navy: #2C3E50;
+        --primary-gold: #C9B458;
+        --accent-navy: #7EB6C1;
+        --accent-gold: #E3D58A;
+        --light-gold: #F5F9FA;
+        --dark-navy: #1F2F3A;
+        --muted-blue: #A6C1D9;
+        --soft-beige: #D4E6E8;
+        --gold-gradient: linear-gradient(45deg, #C9B458, #E3D58A);
+    }
 
-        .main-container {
-            min-height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 3rem 1rem;
-            position: relative;
-        }
+    body {
+        font-family: 'Tajawal', sans-serif;
+        direction: rtl;
+        background-color: var(--soft-beige);
+    }
 
-        .main-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
-            pointer-events: none;
-        }
+    .main-container {
+        min-height: 100vh;
+        background: linear-gradient(135deg, var(--accent-navy), var(--light-gold));
+        padding: 3rem 1rem;
+        position: relative;
+    }
 
-        .wrapper {
-            max-width: 768px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
+    .main-container::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+        pointer-events: none;
+    }
 
+    .wrapper {
+        max-width: 768px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+    }
+
+    .section-box {
+        background-color: white;
+        padding: 2.5rem;
+        margin-bottom: 2.5rem;
+        border-radius: 1.5rem;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
+        animation: fadeInUp 0.6s ease-out;
+    }
+
+    .section-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 35px 65px rgba(0, 0, 0, 0.15);
+    }
+
+    .section-title {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--primary-navy);
+        margin-bottom: 0.75rem;
+        position: relative;
+        padding-bottom: 0.5rem;
+    }
+
+    .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 50px;
+        height: 3px;
+        background: var(--gold-gradient);
+        border-radius: 2px;
+    }
+
+    .section-description {
+        font-size: 0.9rem;
+        color: var(--primary-navy);
+        margin-bottom: 1.75rem;
+        line-height: 1.6;
+    }
+
+    .text-danger {
+        color: #e74c3c !important;
+    }
+
+    .text-danger::after {
+        background: #e74c3c !important;
+    }
+
+    /* Donation Table */
+    .donation-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.9rem;
+        text-align: right;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    .donation-table th {
+        background: var(--gold-gradient);
+        color: var(--dark-navy);
+        font-weight: 600;
+    }
+
+    .donation-table th, .donation-table td {
+        padding: 1rem 1.25rem;
+        border: none;
+        border-bottom: 1px solid var(--light-gold);
+    }
+
+    .donation-table tbody tr {
+        transition: all 0.3s ease;
+    }
+
+    .donation-table tbody tr:hover {
+        background: var(--soft-beige);
+        transform: scale(1.01);
+    }
+
+    .status-success {
+        background: #d1fae5;
+        color: #065f46;
+        font-weight: bold;
+        padding: 0.3rem 0.75rem;
+        border-radius: 999px;
+        font-size: 0.8rem;
+    }
+
+    .status-pending {
+        background: #fef3c7;
+        color: #92400e;
+        font-weight: bold;
+        padding: 0.3rem 0.75rem;
+        border-radius: 999px;
+        font-size: 0.8rem;
+    }
+
+    .sponsorship-section .section-title {
+        color: var(--accent-navy);
+    }
+
+    .sponsorship-section .section-title::after {
+        background: linear-gradient(45deg, var(--accent-navy), var(--muted-blue));
+    }
+
+    .donation-section .section-title {
+        color: var(--primary-gold);
+    }
+
+    .donation-section .section-title::after {
+        background: var(--gold-gradient);
+    }
+
+    @media (max-width: 768px) {
         .section-box {
-            background-color: white;
-            padding: 2.5rem;
-            margin-bottom: 2.5rem;
-            border-radius: 1.5rem;
-            border: none;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15), 
-                        0 0 0 1px rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding: 2rem;
         }
 
-        .section-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 35px 65px rgba(0, 0, 0, 0.2), 
-                        0 0 0 1px rgba(255, 255, 255, 0.15);
-        }
-
-        .section-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #667eea;
-            margin-bottom: 0.75rem;
-            position: relative;
-            padding-bottom: 0.5rem;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 50px;
-            height: 3px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 2px;
-        }
-
-        .section-description {
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 1.75rem;
-            line-height: 1.6;
-        }
-
-        .text-danger {
-            color: #e74c3c !important;
-        }
-
-        .text-danger::after {
-            background: #e74c3c !important;
-        }
-
-        /* Donation Table */
         .donation-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.9rem;
-            text-align: right;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            font-size: 0.85rem;
         }
 
-        .donation-table th,
-        .donation-table td {
-            padding: 1rem 1.25rem;
-            border: none;
-            border-bottom: 1px solid #f1f5f9;
+        .donation-table th, .donation-table td {
+            padding: 0.75rem 1rem;
         }
+    }
 
-        .donation-table th {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            font-weight: 600;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-        }
+    html {
+        scroll-behavior: smooth;
+    }
 
-        .donation-table tbody tr {
-            transition: all 0.3s ease;
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
         }
-
-        .donation-table tbody tr:hover {
-            background: linear-gradient(135deg, #667eea10 0%, #764ba210 100%);
-            transform: scale(1.02);
+        to {
+            opacity: 1;
+            transform: translateY(0);
         }
-
-        .donation-table tbody tr:last-child td {
-            border-bottom: none;
-        }
-
-        .status-success {
-            color: #16a34a;
-            font-weight: bold;
-            background: #16a34a20;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-        }
-
-        .status-pending {
-            color: #f59e0b;
-            font-weight: bold;
-            background: #f59e0b20;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-        }
-
-        /* Special styling for sponsorship section */
-        .sponsorship-section .section-title {
-            color: #0c4a6e;
-        }
-
-        .sponsorship-section .section-title::after {
-            background: linear-gradient(135deg, #0c4a6e 0%, #0369a1 100%);
-        }
-
-        .donation-section .section-title {
-            color: #15803d;
-        }
-
-        .donation-section .section-title::after {
-            background: linear-gradient(135deg, #15803d 0%, #16a34a 100%);
-        }
-
-        /* Responsive enhancements */
-        @media (max-width: 768px) {
-            .section-box {
-                padding: 2rem;
-                margin-bottom: 2rem;
-            }
-            
-            .main-container {
-                padding: 2rem 1rem;
-            }
-            
-            .donation-table {
-                font-size: 0.8rem;
-            }
-            
-            .donation-table th,
-            .donation-table td {
-                padding: 0.75rem 1rem;
-            }
-        }
-
-        /* Smooth scrolling enhancement */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Add subtle animation to the page load */
-        .section-box {
-            animation: fadeInUp 0.6s ease-out;
-        }
-
-        .section-box:nth-child(2) {
-            animation-delay: 0.1s;
-        }
-
-        .section-box:nth-child(3) {
-            animation-delay: 0.2s;
-        }
-
-        .section-box:nth-child(4) {
-            animation-delay: 0.3s;
-        }
-
-        .section-box:nth-child(5) {
-            animation-delay: 0.4s;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    }
     </style>
 
     <div class="main-container">

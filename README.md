@@ -40,6 +40,5 @@
 
 
 
-  Deployed by github at:
-   https://hebaalajouri.github.io/charity-app/
+
 

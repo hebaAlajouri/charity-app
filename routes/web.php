@@ -21,7 +21,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\OrphanApplicationController;
 use App\Http\Controllers\ViewOrphanController;
 use App\Http\Controllers\Admin\AdminOrphanApplicationController;
-
+use App\Http\Controllers\Admin\ThemeController;
 
 
 
@@ -83,7 +83,23 @@ Route::prefix('admin')->name('admin.')->middleware([
 
 Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
 Route::get('/reports/{id}', [ReportController::class, 'show'])->name('reports.show');
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('theme', [ThemeController::class, 'index'])->name('theme.index');
+    Route::put('theme', [ThemeController::class, 'update'])->name('theme.update');
+    Route::post('theme/reset', [ThemeController::class, 'reset'])->name('theme.reset');
+    Route::get('theme/css', [ThemeController::class, 'generateCss'])->name('theme.css');
+});
+// Public route for dynamic CSS
+Route::get('/css/theme.css', [App\Http\Controllers\Admin\ThemeController::class, 'generateCss'])->name('theme.css');
 
+Route::get('/css/app.css', function () {
+    // You can optionally pass dynamic colors here if you want:
+    // $theme = [...];
+
+    return response()
+        ->view('css.app') // 'css.app' = 'resources/views/css/app.css.blade.php'
+        ->header('Content-Type', 'text/css');
+})->name('css.app');
 
 
 
@@ -112,6 +128,7 @@ Route::get('/orphans/{id}', [ViewOrphanController::class, 'show'])->name('orphan
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('orphan_applications', AdminOrphanApplicationController::class);
 });
+
 Route::middleware([
     'auth',
     \App\Http\Middleware\CheckAdmin::class,
@@ -120,3 +137,4 @@ Route::middleware([
     
 });
 require __DIR__.'/auth.php';
+Route::get('/projects/{project}', [\App\Http\Controllers\ProjectController::class, 'show'])->name('projects.show');

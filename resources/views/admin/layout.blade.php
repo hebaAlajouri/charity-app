@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>لوحة التحكم</title>
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
+  @php
+    $unreadCount = \App\Models\Message::where('is_read', false)->count();
+@endphp
+
+
     <style>
   * {
     margin: 0;
@@ -503,6 +508,25 @@ img.show-img {
     background: #4f46e5;
     border-radius: 4px;
 }
+.notification-icon {
+    position: relative;
+    margin-left: 20px;
+    font-size: 24px;
+    text-decoration: none;
+    color: #333;
+}
+
+.notification-icon .counter {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 50%;
+}
+
 
 /* === RESPONSIVE DESIGN === */
 
@@ -823,7 +847,7 @@ img.show-img {
             <div class="nav-item"><a href="/admin/sponsorships" class="nav-link">التبرعات</a></div>
             <div class="nav-item"><a href="/admin/reports" class="nav-link">التقارير</a></div>
             <div class="nav-item"><a href="/admin/news" class="nav-link">الأخبار</a></div>
-            <div class="nav-item"><a href="/admin/messages" class="nav-link">الرسائل</a></div>
+         
             <div class="nav-item"><a href="/admin/orphan_applications" class="nav-link">طلبات الأيتام</a></div>
         </div>
     </nav>
@@ -835,6 +859,14 @@ img.show-img {
         <h1 class="page-title">@yield('title', 'لوحة التحكم')</h1>
     </div>
     <div class="header-right">
+<a href="{{ url('/admin/messages') }}" class="notification-icon" title="رسائل غير مقروءة">
+    <span class="icon">🔔</span>
+    @if ($unreadCount > 0)
+        <span class="counter">{{ $unreadCount }}</span>
+    @endif
+</a>
+
+
         <div class="user-info">
             <span>مرحباً، مدير</span>
         </div>

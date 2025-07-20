@@ -1,14 +1,27 @@
 <x-app-layout>
     <style>
+        :root {
+            --primary-navy: #2C3E50;           /* Soft Deep Blue */
+            --primary-gold: #C9B458;           /* Soft Muted Gold */
+            --accent-navy: #7EB6C1;            /* Baby Blue - Calm */
+            --accent-gold: #E3D58A;            /* Soft Warm Gold */
+            --light-gold: #F5F9FA;             /* Very Light Blue-Gray */
+            --dark-navy: #1F2F3A;              /* Dark Navy */
+            --muted-blue: #A6C1D9;             /* Light Dusty Baby Blue */
+            --soft-beige: #D4E6E8;             /* Pale Baby Blue Tint */
+            --gold-gradient: linear-gradient(45deg, #C9B458, #E3D58A);
+        }
+
         .rtl {
             direction: rtl;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #2c3e50;
+            color: var(--primary-navy);
+            background: var(--light-gold);
         }
 
         /* ===== Hero ===== */
         .news-hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--accent-navy), var(--primary-navy));
             padding: 4rem 2rem 2rem;
             text-align: center;
             color: white;
@@ -46,7 +59,7 @@
 
         /* ===== Section ===== */
         .news-section {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            background: var(--soft-beige);
             padding: 2rem 0 4rem;
         }
 
@@ -70,7 +83,7 @@
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 2rem;
             text-align: center;
-            color: #34495e;
+            color: var(--primary-navy);
         }
 
         .stat-item {
@@ -80,7 +93,7 @@
         .stat-number {
             font-size: 2rem;
             font-weight: 700;
-            color: #e74c3c;
+            color: var(--primary-gold);
             margin-bottom: 0.5rem;
         }
 
@@ -107,12 +120,13 @@
             display: flex;
             flex-direction: column;
             height: 100%;
+            color: var(--primary-navy);
         }
 
         .news-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-            border-color: rgba(231, 76, 60, 0.2);
+            border-color: rgba(201, 180, 88, 0.3);
         }
 
         .news-card::before {
@@ -120,7 +134,7 @@
             position: absolute;
             top: 0; left: 0; right: 0;
             height: 4px;
-            background: linear-gradient(45deg, #e74c3c, #f39c12);
+            background: var(--gold-gradient);
             border-top-left-radius: 20px;
             border-top-right-radius: 20px;
         }
@@ -130,17 +144,17 @@
             position: absolute;
             top: 15px;
             left: 15px;
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            background: linear-gradient(135deg, var(--primary-gold), #a38a44);
             padding: 0.4rem 1rem;
             border-radius: 25px;
             font-size: 1rem;
             font-weight: 700;
-            color: white;
+            color: var(--primary-navy);
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.6);
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 15px rgba(201, 180, 88, 0.6);
+            text-shadow: 1px 1px 3px rgba(255 255 255 / 0.9);
             z-index: 10;
             pointer-events: none;
         }
@@ -173,13 +187,13 @@
         .news-image-overlay {
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(45deg, rgba(231, 76, 60, 0.8), rgba(243, 156, 18, 0.8));
+            background: linear-gradient(45deg, rgba(201, 180, 88, 0.8), rgba(227, 213, 138, 0.8));
             opacity: 0;
             transition: opacity 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            color: var(--primary-navy);
             font-size: 2rem;
         }
 
@@ -189,7 +203,7 @@
 
         .news-placeholder {
             height: 200px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, var(--accent-navy), var(--primary-navy));
             display: flex;
             align-items: center;
             justify-content: center;
@@ -221,11 +235,11 @@
             font-weight: 700;
             margin-bottom: 1rem;
             line-height: 1.4;
-            color: #2c3e50;
+            color: var(--primary-navy);
         }
 
         .news-excerpt {
-            color: #7f8c8d;
+            color: var(--muted-blue);
             line-height: 1.6;
             margin-bottom: 1.5rem;
             font-size: 1rem;
@@ -238,7 +252,7 @@
             align-items: center;
             margin-bottom: 1.5rem;
             padding-top: 1rem;
-            border-top: 1px solid #ecf0f1;
+            border-top: 1px solid var(--soft-beige);
             font-size: 0.9rem;
         }
 
@@ -254,18 +268,19 @@
         }
 
         .news-category {
-            background: linear-gradient(45deg, #e74c3c, #c0392b);
-            color: white;
+            background: var(--primary-gold);
+            color: var(--primary-navy);
             padding: 0.3rem 1rem;
             border-radius: 15px;
             font-weight: 600;
             white-space: nowrap;
+            box-shadow: 0 3px 8px rgba(201, 180, 88, 0.4);
         }
 
         /* ===== Read More Button ===== */
         .news-read-more {
-            background: linear-gradient(45deg, #e74c3c, #c0392b);
-            color: white;
+            background: var(--primary-gold);
+            color: var(--primary-navy);
             padding: 0.8rem 2rem;
             border: none;
             border-radius: 25px;
@@ -275,16 +290,17 @@
             align-items: center;
             gap: 0.5rem;
             transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(231, 76, 60, 0.3);
+            box-shadow: 0 10px 30px rgba(201, 180, 88, 0.3);
             justify-content: center;
             width: 100%;
         }
 
         .news-read-more:hover {
+            background: var(--accent-gold);
+            color: var(--primary-navy);
             transform: translateY(-2px);
-            box-shadow: 0 15px 35px rgba(231, 76, 60, 0.4);
+            box-shadow: 0 15px 35px rgba(227, 213, 138, 0.4);
             text-decoration: none;
-            color: white;
         }
 
         /* ===== Pagination ===== */
@@ -304,18 +320,19 @@
             border-radius: 20px;
             margin-top: 2rem;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            color: var(--primary-navy);
         }
 
         .no-news-icon {
             width: 100px;
             height: 100px;
-            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            background: var(--primary-gold);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 2rem;
-            color: white;
+            color: var(--primary-navy);
             font-size: 2.5rem;
         }
 
@@ -421,8 +438,8 @@
                     <div class="no-news-icon" aria-hidden="true">
                         <i class="fas fa-newspaper"></i>
                     </div>
-                    <h3 style="color: #2c3e50; font-size: 1.5rem; margin-bottom: 1rem;">لا توجد أخبار متاحة حالياً</h3>
-                    <p style="color: #7f8c8d;">نحن نعمل على إضافة أخبار جديدة قريباً. تابعنا للحصول على آخر التحديثات.</p>
+                    <h3>لا توجد أخبار متاحة حالياً</h3>
+                    <p>نحن نعمل على إضافة أخبار جديدة قريباً. تابعنا للحصول على آخر التحديثات.</p>
                 </div>
             @endif
         </div>

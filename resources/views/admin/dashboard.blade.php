@@ -279,7 +279,7 @@
                         },
                         color: '#718096',
                         callback: function(value) {
-                            return value.toLocaleString() + ' ريال';
+                            return value.toLocaleString() + ' دينار';
                         }
                     }
                 },

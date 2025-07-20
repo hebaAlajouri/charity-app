@@ -1,10 +1,10 @@
 <nav class="navbar rtl bg-white shadow-md">
     <div class="nav-container flex items-center justify-between px-4 py-3">
         <!-- الشعار -->
-        <div class="logo flex items-center gap-2 text-[#e74c3c] font-bold text-lg">
-            <i class="fas fa-heart"></i>
-            <a href="{{ route('dashboard') }}">بسمة طفل</a>
-        </div>
+           <!-- Maximized Logo -->
+            <div class="flex justify-center mb-6">
+                <img src="{{ asset('storage/logo.png') }}" alt="Logo" class="h-20 max-w-full object-contain">
+            </div>
 
         <!-- زر القائمة للموبايل -->
         <button id="menu-toggle" class="md:hidden text-gray-700 focus:outline-none">
@@ -20,7 +20,7 @@
             <li><a href="{{ route('contact.form') }}">تواصل</a></li>
             <li><a href="{{ route('news.index') }}">أخبار</a></li>
             <li><a href="{{ route('orphan.create') }}">طلب استفادة</a></li>
-            
+
             @auth
                 @if(Auth::user()->role === 'admin')
                     <li><a href="{{ route('admin.dashboard') }}" class="text-[#e67e22] font-semibold">لوحة التحكم</a></li>
@@ -92,6 +92,7 @@
         </ul>
     </div>
 </nav>
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const menuToggle = document.getElementById('menu-toggle');

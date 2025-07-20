@@ -13,7 +13,7 @@ class HomeController extends Controller
 {
   public function showLandingPage()
 {
-    $projects = Project::all();
+   $projects = Project::latest()->take(3)->get();
 
     $sponsoredChildren = Sponsorship::where('status', 'active')->count();
 
