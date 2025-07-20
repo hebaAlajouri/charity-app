@@ -44,8 +44,7 @@
             <div class="footer-section">
                 <h3 class="text-lg font-bold text-[#f39c12] mb-3">من نحن</h3>
                 <p class="text-sm text-[#bdc3c7] leading-relaxed">
-                    بسمة طفل هي جمعية خيرية تهدف لرعاية الأيتام ودعم المشاريع الإنسانية.
-                </p>
+                    جمعية فرسان الريادة هي جمعية خيرية تهدف لرعاية الأيتام ودعم المشاريع الإنسانية.             </p>
             </div>
 
             <!-- Quick Links -->
@@ -76,7 +75,7 @@
 
         <!-- Bottom -->
         <div class="footer-bottom border-t border-[#34495e] pt-4 text-sm text-[#95a5a6]">
-            &copy; {{ date('Y') }} جميع الحقوق محفوظة لجمعية بسمة طفل.
+            &copy; {{ date('Y') }} جميع الحقوق محفوظة لجمعية فرسان الريادة.
         </div>
     </div>
 </footer>
