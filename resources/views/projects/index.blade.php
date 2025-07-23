@@ -276,25 +276,24 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <!-- Header -->
             <div class="header-section">
-                <h1 class="main-title">المشاريع المتاحة</h1>
-                <p class="subtitle">
-                    اكتشف مجموعة متنوعة من المشاريع النبيلة وساهم في تحقيق أهدافها الإنسانية
-                </p>
+                <h1 class="main-title">{{ __('projects.page_title') }}</h1>
+                <p class="subtitle">{{ __('projects.page_subtitle') }}</p>
             </div>
 
             <!-- Projects Grid -->
             <div class="projects-grid">
-                @forelse ($projects as $project)
+                @forelse($projects as $project)
                     <div class="project-card">
                         <!-- Project Image -->
                         <div class="project-image">
-                            @if($project->image)
-                                <img src="{{ asset('storage/' . $project->image) }}" alt="{{ $project->name }}">
+                            @if ($project->image)
+                                <img src="{{ asset('storage/' . $project->image) }}"
+                                     alt="{{ App::getLocale() === 'ar' ? $project->name_ar : $project->name_en }}">
                             @else
                                 <div class="shimmer-placeholder">
                                     <div>
                                         <div style="font-size: 2rem; margin-bottom: 0.5rem;">📸</div>
-                                        <div>لا توجد صورة</div>
+                                        <div>{{ __('projects.no_image') }}</div>
                                     </div>
                                 </div>
                             @endif
@@ -302,19 +301,20 @@
 
                         <!-- Project Content -->
                         <div class="project-content">
-                            <h3 class="project-title">{{ $project->name }}</h3>
-                          
+                          <h3 class="project-title">
+    {{ $project->name }}
+</h3>
+
 
                             <!-- Stats Section -->
                             <div class="stats-section">
                                 <div class="stat-item">
-                                    <span class="stat-label">المبلغ المطلوب</span>
-                                    <span class="stat-value">{{ number_format($project->goal_amount, 2) }} د.أ</span>
+                                    <span class="stat-label">{{ __('projects.goal_amount') }}</span>
+                                    <span class="stat-value">{{ number_format($project->goal_amount, 2) }} JD</span>
                                 </div>
-                                
                                 <div class="stat-item secondary">
-                                    <span class="stat-label">المبلغ المتبرع به</span>
-                                    <span class="stat-value">{{ number_format($project->raised_amount, 2) }} د.أ</span>
+                                    <span class="stat-label">{{ __('projects.raised_amount') }}</span>
+                                    <span class="stat-value">{{ number_format($project->raised_amount, 2) }} JD</span>
                                 </div>
                             </div>
 
@@ -329,36 +329,29 @@
                                     <div class="progress-bar" style="width: {{ $percentage }}%"></div>
                                 </div>
                                 <div class="progress-info">
-                                    <span class="progress-label">نسبة الإنجاز</span>
+                                    <span class="progress-label">{{ __('projects.progress') }}</span>
                                     <span class="progress-percentage">{{ $percentage }}%</span>
                                 </div>
                             </div>
 
-                            <!-- Donate Button -->
-                         <!-- Donate Button -->
-<div class="flex flex-col gap-2 mt-4">
-    <a href="{{ route('donations.confirm', $project->id) }}" class="donate-button">
-        <span>ساهم الآن</span>
- 
-    </a>
+                            <!-- Donate + Details Buttons -->
+                            <div class="flex flex-col gap-2 mt-4">
+                                <a href="{{ route('donations.confirm', $project->id) }}" class="donate-button">
+                                    <span>{{ __('projects.donate_now') }}</span>
+                                </a>
 
-    <a href="{{ route('projects.show', $project->id) }}"
-       class="text-center bg-gray-100 text-gray-700 font-medium py-2 rounded-lg border border-gray-300 hover:bg-gray-200 transition">
-        عرض التفاصيل
-    </a>
-</div>
-
-
-                            </a>
+                                <a href="{{ route('projects.show', $project->id) }}"
+                                   class="text-center bg-gray-100 text-gray-700 font-medium py-2 rounded-lg border border-gray-300 hover:bg-gray-200 transition">
+                                    {{ __('projects.view_details') }}
+                                </a>
+                            </div>
                         </div>
                     </div>
                 @empty
                     <div class="empty-state">
                         <div class="empty-icon">🔍</div>
-                        <h3 class="empty-title">لا توجد مشاريع متاحة حالياً</h3>
-                        <p class="empty-description">
-                            نعمل على إضافة مشاريع جديدة ومميزة قريباً. تابعونا للحصول على آخر التحديثات والفرص المتاحة للمساهمة.
-                        </p>
+                        <h3 class="empty-title">{{ __('projects.no_projects') }}</h3>
+                        <p class="empty-description">{{ __('projects.stay_tuned') }}</p>
                     </div>
                 @endforelse
             </div>

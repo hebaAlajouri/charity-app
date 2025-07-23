@@ -1,359 +1,494 @@
 <x-app-layout>
     <style>
         :root {
-            --primary-navy: #2C3E50;           /* Soft Deep Blue */
-            --primary-gold: #C9B458;           /* Soft Muted Gold */
-            --accent-navy: #7EB6C1;            /* Baby Blue - Calm */
-            --accent-gold: #E3D58A;            /* Soft Warm Gold */
-            --light-gold: #F5F9FA;             /* Very Light Blue-Gray */
-            --dark-navy: #1F2F3A;              /* Dark Navy */
-            --muted-blue: #A6C1D9;             /* Light Dusty Baby Blue */
-            --soft-beige: #D4E6E8;             /* Pale Baby Blue Tint */
-            --gold-gradient: linear-gradient(45deg, #C9B458, #E3D58A);
+            --primary-navy: #2C3E50;
+            --primary-gold: #C9B458;
+            --accent-navy: #7EB6C1;
+            --accent-gold: #E3D58A;
+            --light-gold: #F5F9FA;
+            --dark-navy: #1F2F3A;
+            --muted-blue: #64748B;
+            --soft-beige: #F8FAFC;
+            --success-green: #10B981;
+            --gradient-primary: linear-gradient(135deg, var(--primary-navy) 0%, var(--accent-navy) 100%);
+            --gradient-gold: linear-gradient(45deg, var(--primary-gold), var(--accent-gold));
+            --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-elevated: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
 
-        .rtl {
-            direction: rtl;
+        .rtl, 
+        [dir="rtl"],
+        html[lang="ar"],
+        html[lang="ar"] * { 
+            direction: rtl; 
+            
         }
-
-        .job-detail-hero {
-            background: linear-gradient(135deg, var(--primary-navy) 0%, var(--accent-navy) 100%);
-            padding: 4rem 2rem 2rem;
+        
+        html[lang="ar"] .job-hero-content,
+        html[lang="ar"] .job-title-section {
             text-align: center;
-            color: var(--light-gold);
+        }
+        
+        html[lang="ar"] .hero-badge,
+        html[lang="ar"] .btn {
+            flex-direction: row-reverse;
+        }
+        
+        html[lang="ar"] .section-title {
+            flex-direction: row-reverse;
+        }
+        
+        html[lang="ar"] .overview-item {
+            flex-direction: row-reverse;
+            text-align: right;
+        }
+        
+        html[lang="ar"] .info-card {
+            border-left: none;
+            border-right: 4px solid var(--primary-gold);
+        }
+        
+        html[lang="ar"] .section-title::before {
+            order: 2;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--soft-beige) 0%, var(--light-gold) 100%);
+            min-height: 100vh;
+        }
+
+        /* Hero Section */
+        .job-hero {
+            background: var(--gradient-primary);
             position: relative;
             overflow: hidden;
+            padding: 4rem 0 3rem;
         }
 
-        .job-detail-hero::before {
+        .job-hero::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="%23F5F9FA" opacity="0.1"/><circle cx="80" cy="80" r="3" fill="%23F5F9FA" opacity="0.05"/><circle cx="40" cy="60" r="1" fill="%23F5F9FA" opacity="0.1"/></svg>');
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.03) 0%, transparent 50%);
         }
 
-        .job-detail-hero-content {
+        .job-hero-content {
             position: relative;
             z-index: 2;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .job-detail-hero h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(31, 47, 58, 0.7); /* dark-navy shadow */
+            text-align: center;
             color: var(--light-gold);
         }
 
-        .job-meta-badges {
+        .job-hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            line-height: 1.2;
+        }
+
+        .job-hero-badges {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
             gap: 1rem;
-            margin-bottom: 1.5rem;
+            margin-top: 2rem;
         }
 
-        .job-location-badge {
-            background: var(--gold-gradient);
-            color: var(--dark-navy);
-            padding: 0.5rem 1.5rem;
-            border-radius: 25px;
-            font-size: 1rem;
+        .hero-badge {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
             font-weight: 600;
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            box-shadow: 0 0 8px var(--accent-gold);
-        }
-
-        .job-type-badge {
-            background: var(--accent-gold);
-            color: var(--dark-navy);
-            padding: 0.5rem 1.5rem;
-            border-radius: 25px;
-            font-size: 1rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            box-shadow: 0 0 6px var(--accent-gold);
-        }
-
-        .job-deadline-badge {
-            background: var(--gold-gradient);
-            color: var(--dark-navy);
-            padding: 0.5rem 1.5rem;
-            border-radius: 25px;
-            font-size: 1rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            animation: pulse 2s infinite;
-            box-shadow: 0 0 15px var(--accent-gold);
-        }
-
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 20px var(--accent-gold); }
-            50% { box-shadow: 0 0 30px var(--primary-gold); }
-        }
-
-        .job-detail-container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            position: relative;
-            z-index: 3;
-            margin-top: -2rem;
-        }
-
-        .job-detail-content {
-            background: white;
-            border-radius: 20px;
-            padding: 3rem;
-            box-shadow: 0 15px 35px rgba(44, 62, 80, 0.1); /* dark-navy shadow */
-            position: relative;
-            border: 2px solid transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
             transition: all 0.3s ease;
         }
 
-        .job-detail-content::before {
+        .hero-badge:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .badge-urgent {
+            background: var(--gradient-gold);
+            color: var(--dark-navy);
+            animation: glow 2s ease-in-out infinite alternate;
+            box-shadow: 0 0 20px rgba(201, 180, 88, 0.4);
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 20px rgba(201, 180, 88, 0.4); }
+            to { box-shadow: 0 0 30px rgba(201, 180, 88, 0.8); }
+        }
+
+        /* Main Content Container */
+        .job-container {
+            max-width: 1000px;
+            margin: -2rem auto 0;
+            padding: 0 1rem;
+            position: relative;
+            z-index: 3;
+        }
+
+        .job-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-elevated);
+            border: 1px solid rgba(201, 180, 88, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .job-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 32px 64px -12px rgba(0, 0, 0, 0.15);
+        }
+
+        .job-card-header {
+            background: var(--gradient-gold);
+            padding: 0.5rem;
+            position: relative;
+        }
+
+        .job-card-header::after {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 4px;
-            background: var(--gold-gradient);
-            border-radius: 20px 20px 0 0;
-            box-shadow: 0 0 10px var(--primary-gold);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--primary-navy);
+            border-radius: 3px;
         }
 
-        .job-detail-content:hover {
-            box-shadow: 0 25px 50px rgba(44, 62, 80, 0.15);
-            border-color: rgba(201, 180, 88, 0.4);
+        /* Content Sections */
+        .job-content {
+            padding: 3rem;
         }
 
-        .job-icon-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
+        .job-title-section {
+            text-align: center;
+            margin-bottom: 3rem;
         }
 
-        .job-main-icon {
+        .job-icon {
             width: 80px;
             height: 80px;
-            background: var(--primary-gold);
+            background: var(--gradient-gold);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--primary-navy);
-            font-size: 2rem;
-            box-shadow: 0 10px 30px var(--accent-gold);
-            transition: background 0.3s ease;
-        }
-
-        .job-main-icon:hover {
-            background: var(--accent-gold);
+            margin: 0 auto 1.5rem;
             color: var(--dark-navy);
-            box-shadow: 0 10px 40px var(--primary-gold);
+            font-size: 2rem;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
         }
 
-        .job-title-section h1 {
+        .job-icon:hover {
+            transform: rotate(5deg) scale(1.05);
+            box-shadow: var(--shadow-elevated);
+        }
+
+        .job-title {
             font-size: 2.5rem;
             font-weight: 700;
             color: var(--primary-navy);
             margin-bottom: 0.5rem;
+            line-height: 1.3;
         }
 
-        .job-description-section {
-            margin-top: 2rem;
+        .job-subtitle {
+            color: var(--muted-blue);
+            font-size: 1.1rem;
+            font-weight: 500;
         }
 
-        .job-description-title {
+        /* Info Grid */
+        .job-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .info-card {
+            background: var(--soft-beige);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border-left: 4px solid var(--primary-gold);
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: var(--primary-navy);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-value {
+            color: var(--muted-blue);
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        /* Description Section */
+        .job-description {
+            margin: 3rem 0;
+        }
+
+        .section-title {
             font-size: 1.5rem;
             font-weight: 700;
             color: var(--primary-navy);
             margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.75rem;
         }
 
-        .job-description-title::before {
+        .section-title::before {
             content: '';
             width: 4px;
-            height: 24px;
-            background: var(--gold-gradient);
+            height: 28px;
+            background: var(--gradient-gold);
             border-radius: 2px;
         }
 
-        .job-description-content {
+        .description-content {
             color: var(--muted-blue);
             line-height: 1.8;
             font-size: 1.1rem;
             white-space: pre-line;
         }
 
-        .job-actions {
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--soft-beige);
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn-apply {
-            background: var(--gold-gradient);
-            color: var(--dark-navy);
-            padding: 1rem 2.5rem;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
+        .description-content h3 {
+            color: var(--primary-navy);
             font-weight: 600;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px var(--accent-gold);
+            margin: 1.5rem 0 0.75rem;
         }
 
-        .btn-apply:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px var(--primary-gold);
-            color: var(--primary-navy);
-            text-decoration: none;
+        .description-content ul {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
         }
 
-        .btn-back {
-            background: var(--accent-gold);
-            color: var(--dark-navy);
-            padding: 1rem 2.5rem;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px var(--accent-gold);
+        .description-content li {
+            margin-bottom: 0.5rem;
+            position: relative;
         }
 
-        .btn-back:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px var(--primary-gold);
-            color: var(--primary-navy);
-            text-decoration: none;
+        .description-content li::marker {
+            color: var(--success-green);
         }
 
-        .job-detail-section {
-            background: linear-gradient(135deg, var(--soft-beige), var(--light-gold));
-            padding: 2rem 0 4rem;
-            min-height: 100vh;
+        /* Quick Overview */
+        .job-overview {
+            background: linear-gradient(135deg, var(--soft-beige), white);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 3rem 0;
+            border: 1px solid rgba(201, 180, 88, 0.2);
         }
 
-        .job-highlights {
-            background: linear-gradient(135deg, var(--soft-beige), var(--light-gold));
-            padding: 1.5rem;
-            border-radius: 15px;
-            margin-bottom: 2rem;
-            border-left: 4px solid var(--primary-gold);
-        }
-
-        .job-highlights h3 {
-            color: var(--primary-navy);
-            font-weight: 700;
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-        }
-
-        .job-highlights ul {
+        .overview-list {
             list-style: none;
             padding: 0;
         }
 
-        .job-highlights li {
-            color: var(--muted-blue);
-            margin-bottom: 0.5rem;
+        .overview-item {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 1rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
 
-        .job-highlights li::before {
-            content: '✓';
-            color: #27ae60;
-            font-weight: bold;
+        .overview-item:last-child {
+            border-bottom: none;
+        }
+
+        .overview-icon {
+            width: 12px;
+            height: 12px;
+            background: var(--success-green);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .overview-label {
+            font-weight: 600;
+            color: var(--primary-navy);
+            min-width: 100px;
+        }
+
+        .overview-value {
+            color: var(--muted-blue);
+            font-weight: 500;
+        }
+
+        /* Action Buttons */
+        .job-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: var(--gradient-gold);
+            color: var(--dark-navy);
+            box-shadow: 0 8px 25px rgba(201, 180, 88, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(201, 180, 88, 0.4);
+            color: var(--dark-navy);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary-navy);
+            border: 2px solid var(--primary-gold);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-gold);
+            color: var(--dark-navy);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-elevated);
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .job-detail-hero h1 {
-                font-size: 2rem;
+            .job-hero {
+                padding: 3rem 0 2rem;
             }
-
-            .job-detail-content {
+            
+            .job-content {
                 padding: 2rem;
             }
-
-            .job-meta-badges {
-                flex-direction: column;
-                align-items: center;
+            
+            .job-title {
+                font-size: 2rem;
             }
-
-            .job-icon-header {
-                flex-direction: column;
-                text-align: center;
-            }
-
+            
             .job-actions {
                 flex-direction: column;
                 align-items: center;
             }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+                max-width: 300px;
+            }
         }
 
         @media (max-width: 480px) {
-            .job-detail-hero {
-                padding: 2rem 1rem 1rem;
+            .job-container {
+                padding: 0 0.5rem;
             }
-
-            .job-detail-container {
-                padding: 0 1rem;
-            }
-
-            .job-detail-content {
+            
+            .job-content {
                 padding: 1.5rem;
             }
-
-            .job-title-section h1 {
-                font-size: 2rem;
+            
+            .hero-badge {
+                font-size: 0.9rem;
+                padding: 0.6rem 1.2rem;
             }
         }
     </style>
 
     <!-- Hero Section -->
-    <div class="job-detail-hero rtl">
-        <div class="job-detail-hero-content">
-            <div class="job-meta-badges">
-                <span class="job-location-badge">
+    <div class="job-hero {{ app()->getLocale() === 'ar' ? 'rtl' : '' }}">
+        <div class="job-hero-content">
+            <h1>{{ app()->getLocale() === 'ar' ? $job->title : ($job->title_en ?? $job->title) }}</h1>
+            <div class="job-hero-badges">
+                <span class="hero-badge">
                     <i class="fas fa-map-marker-alt"></i>
-                    {{ $job->location ?? 'عن بُعد' }}
+                    {{ app()->getLocale() === 'ar' ? ($job->location ?? __('careersshow.remote')) : ($job->location_en ?? $job->location ?? __('careersshow.remote')) }}
                 </span>
-                <span class="job-type-badge">
+                <span class="hero-badge">
                     <i class="fas fa-briefcase"></i>
-                    {{ $job->type }}
+                    @if(app()->getLocale() === 'ar')
+                        {{ $job->type }}
+                    @else
+                        @switch($job->type)
+                            @case('دوام كامل')
+                                {{ __('Full Time') }}
+                                @break
+                            @case('دوام جزئي')
+                                {{ __('Part Time') }}
+                                @break
+                            @case('متطوع')
+                                {{ __('Volunteer') }}
+                                @break
+                            @default
+                                {{ $job->type }}
+                        @endswitch
+                    @endif
                 </span>
                 @if($job->deadline)
-                    <span class="job-deadline-badge">
+                    <span class="hero-badge badge-urgent">
                         <i class="fas fa-clock"></i>
-                        الموعد النهائي: {{ $job->deadline->format('d-m-Y') }}
+                        {{ __('careersshow.deadline') }}: {{ $job->deadline->format('d-m-Y') }}
                     </span>
                 @endif
             </div>
@@ -361,46 +496,122 @@
     </div>
 
     <!-- Main Content -->
-    <div class="job-detail-section rtl">
-        <div class="job-detail-container">
-            <div class="job-detail-content">
-                <div class="job-icon-header">
-                    <div class="job-main-icon">
+    <div class="job-container">
+        <div class="job-card">
+            <div class="job-card-header"></div>
+            
+            <div class="job-content">
+                <div class="job-title-section">
+                    <div class="job-icon">
                         <i class="fas fa-user-tie"></i>
                     </div>
-                    <div class="job-title-section">
-                        <h1>{{ $job->title }}</h1>
-                    </div>
+                    <h2 class="job-title">{{ app()->getLocale() === 'ar' ? $job->title : ($job->title_en ?? $job->title) }}</h2>
+                    <p class="job-subtitle">{{ __('careersshow.join_our_team') }}</p>
                 </div>
 
-                <div class="job-highlights">
-                    <h3>نبذة سريعة</h3>
-                    <ul>
-                        <li>الموقع: {{ $job->location ?? 'عن بُعد' }}</li>
-                        <li>نوع العمل: {{ $job->type }}</li>
+                <!-- Job Info Grid -->
+                <div class="job-info-grid">
+                    <div class="info-card">
+                        <div class="info-label">{{ __('careersshow.location') }}</div>
+                        <div class="info-value">{{ app()->getLocale() === 'ar' ? ($job->location ?? __('careersshow.remote')) : ($job->location_en ?? $job->location ?? __('careersshow.remote')) }}</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-label">{{ __('careersshow.type') }}</div>
+                        <div class="info-value">
+                            @if(app()->getLocale() === 'ar')
+                                {{ $job->type }}
+                            @else
+                                @switch($job->type)
+                                    @case('دوام كامل')
+                                        {{ __('Full Time') }}
+                                        @break
+                                    @case('دوام جزئي')
+                                        {{ __('Part Time') }}
+                                        @break
+                                    @case('متطوع')
+                                        {{ __('Volunteer') }}
+                                        @break
+                                    @default
+                                        {{ $job->type }}
+                                @endswitch
+                            @endif
+                        </div>
+                    </div>
+                    @if($job->deadline)
+                        <div class="info-card">
+                            <div class="info-label">{{ __('careersshow.deadline') }}</div>
+                            <div class="info-value">{{ $job->deadline->format('M d, Y') }}</div>
+                        </div>
+                    @endif
+                </div>
+
+                <!-- Quick Overview -->
+                <div class="job-overview">
+                    <h2 class="section-title">{{ __('careersshow.quick_info') }}</h2>
+                    <ul class="overview-list">
+                        <li class="overview-item">
+                            <div class="overview-icon"></div>
+                            <span class="overview-label">{{ __('careersshow.location') }}:</span>
+                            <span class="overview-value">{{ app()->getLocale() === 'ar' ? ($job->location ?? __('careersshow.remote')) : ($job->location_en ?? $job->location ?? __('careersshow.remote')) }}</span>
+                        </li>
+                        <li class="overview-item">
+                            <div class="overview-icon"></div>
+                            <span class="overview-label">{{ __('careersshow.type') }}:</span>
+                            <span class="overview-value">
+                                @if(app()->getLocale() === 'ar')
+                                    {{ $job->type }}
+                                @else
+                                    @switch($job->type)
+                                        @case('دوام كامل')
+                                            {{ __('Full Time') }}
+                                            @break
+                                        @case('دوام جزئي')
+                                            {{ __('Part Time') }}
+                                            @break
+                                        @case('متطوع')
+                                            {{ __('Volunteer') }}
+                                            @break
+                                        @default
+                                            {{ $job->type }}
+                                    @endswitch
+                                @endif
+                            </span>
+                        </li>
                         @if($job->deadline)
-                            <li>الموعد النهائي للتقديم: {{ $job->deadline->format('d-m-Y') }}</li>
+                            <li class="overview-item">
+                                <div class="overview-icon"></div>
+                                <span class="overview-label">{{ __('careersshow.deadline') }}:</span>
+                                <span class="overview-value">
+                                    @if(app()->getLocale() === 'ar')
+                                        {{ $job->deadline->format('Y-m-d') }}
+                                    @else
+                                        {{ $job->deadline->format('M d, Y') }}
+                                    @endif
+                                </span>
+                            </li>
                         @endif
                     </ul>
                 </div>
 
-                <div class="job-description-section">
-                    <h2 class="job-description-title">
+                <!-- Job Description -->
+                <div class="job-description">
+                    <h2 class="section-title">
                         <i class="fas fa-file-alt"></i>
-                        تفاصيل الوظيفة
+                        {{ __('careersshow.job_details') }}
                     </h2>
-                    <div class="job-description-content">{{ $job->description }}</div>
+                    <div class="description-content">{{ app()->getLocale() === 'ar' ? $job->description : ($job->description_en ?? $job->description) }}</div>
                 </div>
 
+                <!-- Action Buttons -->
                 <div class="job-actions">
-                    <a href="{{ route('careers.apply', $job) }}" class="btn-apply">
-                        تقدّم الآن
+                    <a href="{{ route('careers.apply', $job) }}" class="btn btn-primary">
+                        {{ __('careersshow.apply_now') }}
                         <i class="fas fa-paper-plane"></i>
                     </a>
 
-                    <a href="{{ route('careers.index') }}" class="btn-back">
+                    <a href="{{ route('careers.index') }}" class="btn btn-secondary">
                         <i class="fas fa-arrow-right"></i>
-                        العودة للوظائف
+                        {{ __('careersshow.back_to_jobs') }}
                     </a>
                 </div>
             </div>

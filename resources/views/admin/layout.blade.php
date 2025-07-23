@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="{{ app()->getLocale() }}" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -527,7 +527,57 @@ img.show-img {
     border-radius: 50%;
 }
 
+   body.rtl {
+        direction: rtl;
+        text-align: right;
+        font-family: 'Cairo', sans-serif;
+    }
 
+    body.ltr {
+        direction: ltr;
+        text-align: left;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .rtl .text-left {
+        text-align: right !important;
+    }
+
+    .ltr .text-right {
+        text-align: left !important;
+    }
+
+    /* Optional: flip margins and paddings */
+    .rtl .ml-auto {
+        margin-left: 0 !important;
+        margin-right: auto !important;
+    }
+
+    .rtl .mr-auto {
+        margin-right: 0 !important;
+        margin-left: auto !important;
+    }
+
+    .rtl .pl-4 {
+        padding-left: 0 !important;
+        padding-right: 1rem !important;
+    }
+
+    .rtl .pr-4 {
+        padding-right: 0 !important;
+        padding-left: 1rem !important;
+    }
+     body.rtl {
+            direction: rtl;
+            text-align: right;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body.ltr {
+            direction: ltr;
+            text-align: left;
+            font-family: 'Roboto', sans-serif;
+        }
 /* === RESPONSIVE DESIGN === */
 
 /* Mobile First Approach - Extra Small Devices (Portrait phones, less than 576px) */
@@ -832,7 +882,7 @@ img.show-img {
 }
 </style>
 </head>
-<body>
+<body class="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
 <div class="dashboard-container">
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-header">
@@ -870,10 +920,20 @@ img.show-img {
         <div class="user-info">
             <span>مرحباً، مدير</span>
         </div>
+        
         <form method="POST" action="{{ route('logout') }}">
             @csrf
             <button type="submit" class="logout-btn">تسجيل الخروج</button>
         </form>
+           <!-- Language Switcher for Mobile -->
+            <li class="pt-2 border-t border-gray-200">
+                <div class="flex gap-2 text-sm {{ app()->getLocale() == 'ar' ? 'justify-start' : 'justify-start' }}">
+                    <a href="{{ route('lang.switch', 'ar') }}" class="{{ app()->getLocale() == 'ar' ? 'font-bold text-[#e74c3c]' : 'text-gray-600 hover:text-[#e74c3c]' }} transition-colors">{{ __('nav.arabic') }}</a>
+                    <span class="text-gray-400">|</span>
+                    <a href="{{ route('lang.switch', 'en') }}" class="{{ app()->getLocale() == 'en' ? 'font-bold text-[#e74c3c]' : 'text-gray-600 hover:text-[#e74c3c]' }} transition-colors">{{ __('nav.english') }}</a>
+                </div>
+            </li>
+
     </div>
 </header>
 

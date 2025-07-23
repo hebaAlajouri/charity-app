@@ -160,38 +160,38 @@
             @csrf
 
             <div class="form-header">
-                <h2>معلومات الكافل</h2>
-                <p>يرجى تعبئة كافة البيانات بدقة</p>
+                <h2>{{ __('sponsorship.sponsor_info_title') }}</h2>
+                <p>{{ __('sponsorship.sponsor_info_desc') }}</p>
             </div>
 
             <div class="form-content">
-                <h3 class="section-title">بيانات شخصية</h3>
+                <h3 class="section-title">{{ __('sponsorship.personal_data') }}</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <input type="text" name="sponsor_name" class="form-input" placeholder="اسم الكافل" required>
-                    <input type="text" name="country" class="form-input" placeholder="الدولة">
-                    <input type="text" name="phone" class="form-input" placeholder="رقم الهاتف" required>
-                    <input type="email" name="email" class="form-input" placeholder="البريد الإلكتروني" required>
+                    <input type="text" name="sponsor_name" class="form-input" placeholder="{{ __('sponsorship.sponsor_name') }}" required>
+                    <input type="text" name="country" class="form-input" placeholder="{{ __('sponsorship.country') }}">
+                    <input type="text" name="phone" class="form-input" placeholder="{{ __('sponsorship.phone') }}" required>
+                    <input type="email" name="email" class="form-input" placeholder="{{ __('sponsorship.email') }}" required>
                     <input type="date" name="start_date" class="form-input" required>
                 </div>
 
-                <h3 class="section-title">تفاصيل الكفالة</h3>
+                <h3 class="section-title">{{ __('sponsorship.sponsorship_details') }}</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <select name="orphan_count" class="form-select">
-                        <option value="">عدد الأيتام</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3+">أكثر من 2</option>
+                        <option value="">{{ __('sponsorship.orphan_count_placeholder') }}</option>
+                        <option value="1">{{ __('sponsorship.orphan_1') }}</option>
+                        <option value="2">{{ __('sponsorship.orphan_2') }}</option>
+                        <option value="3+">{{ __('sponsorship.orphan_3_plus') }}</option>
                     </select>
-                    <input type="text" name="sponsoring_for" class="form-input" placeholder="المساهمة عن">
+                    <input type="text" name="sponsoring_for" class="form-input" placeholder="{{ __('sponsorship.sponsoring_for') }}">
                     <select name="sponsorship_type" class="form-select">
-                        <option value="">نوع الكفالة</option>
-                        <option value="شهرية">شهرية</option>
-                        <option value="سنوية">سنوية</option>
-                        <option value="مرة واحدة">مرة واحدة</option>
+                        <option value="">{{ __('sponsorship.sponsorship_type') }}</option>
+                        <option value="شهرية">{{ __('sponsorship.sponsorship_type_monthly') }}</option>
+                        <option value="سنوية">{{ __('sponsorship.sponsorship_type_yearly') }}</option>
+                        <option value="مرة واحدة">{{ __('sponsorship.sponsorship_type_once') }}</option>
                     </select>
                 </div>
 
-                <h3 class="section-title">اختر الأيتام للكفالة</h3>
+                <h3 class="section-title">{{ __('sponsorship.select_orphans') }}</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     @forelse ($orphans as $orphan)
                         <div class="orphan-card" onclick="toggleOrphan({{ $orphan->id }})">
@@ -199,10 +199,10 @@
                                 <div class="orphan-avatar">{{ mb_substr($orphan->name, 0, 1) }}</div>
                                 <div>
                                     <div>{{ $orphan->name }}</div>
-                                    <small>{{ $orphan->age }} سنة</small><br>
+                                    <small>{{ $orphan->age }} {{ __('sponsorship.year') ?? 'سنة' }}</small><br>
                                     <a href="{{ route('orphans.show', $orphan->id) }}"
                                        class="text-sm text-[#7EB6C1] underline hover:text-[#5a9cae] mt-1 inline-block">
-                                        عرض الملف
+                                        {{ __('sponsorship.view_profile') }}
                                     </a>
                                 </div>
                                 <div class="custom-checkbox" id="checkbox-{{ $orphan->id }}">
@@ -212,13 +212,13 @@
                             <input type="checkbox" name="orphans[]" value="{{ $orphan->id }}" id="orphan-{{ $orphan->id }}" hidden>
                         </div>
                     @empty
-                        <p class="text-center text-gray-500">لا يوجد أيتام متاحين حالياً.</p>
+                        <p class="text-center text-gray-500">{{ __('sponsorship.no_orphans') }}</p>
                     @endforelse
                 </div>
 
                 <div class="submit-section">
                     <button type="submit" class="submit-btn">
-                        <i class="fas fa-paper-plane ml-2"></i> إرسال الطلب
+                        <i class="fas fa-paper-plane ml-2"></i> {{ __('sponsorship.submit') }}
                     </button>
                 </div>
             </div>

@@ -264,6 +264,25 @@
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2.5rem;
         }
+        html[dir="rtl"] body {
+    direction: rtl;
+    text-align: right;
+}
+
+html[dir="ltr"] body {
+    direction: ltr;
+    text-align: left;
+}
+
+/* Optional for flex or grid containers */
+html[dir="rtl"] .flex-dir {
+    flex-direction: row-reverse;
+}
+
+html[dir="ltr"] .flex-dir {
+    flex-direction: row;
+}
+
 
         /* Responsive Design */
         @media (max-width: 768px) {
@@ -297,15 +316,15 @@
     </style>
 
     <!-- Hero Section -->
-    <div class="careers-hero rtl">
+    <div class="careers-hero flex-dir">
         <div class="careers-hero-content">
-            <h1>انضم إلينا</h1>
-            <p>اكتشف الفرص المتاحة وكن جزءاً من فريقنا المميز في رحلة تحقيق الأهداف والنجاح</p>
+            <h1>{{ __('careers.join_us') }}</h1>
+            <p>{{ __('careers.subtitle') }}</p>
         </div>
     </div>
 
     <!-- Main Content -->
-    <div class="careers-section rtl">
+    <div class="careers-section flex-dir">
         <div class="careers-container">
             @if($jobs->count() > 0)
                 <div class="jobs-grid">
@@ -315,16 +334,28 @@
                                 <div class="job-icon">
                                     <i class="fas fa-briefcase"></i>
                                 </div>
-                                <h2 class="job-title">{{ $job->title }}</h2>
+                                <h2 class="job-title">
+                                    {{ app()->getLocale() === 'en' && $job->title_en ? $job->title_en : $job->title }}
+                                </h2>
                                 <div class="job-meta">
-                                    <span class="job-location">{{ $job->location ?? 'عن بُعد' }}</span>
-                                    <span class="job-type">{{ $job->type }}</span>
+                                    <span class="job-location">
+                                        {{ 
+                                            app()->getLocale() === 'en' 
+                                            ? ($job->location_en ?? __('careers.remote')) 
+                                            : ($job->location ?? __('careers.remote')) 
+                                        }}
+                                    </span>
+                                    <span class="job-type">
+                                        {{ __('careers.job_type.' . $job->type) }}
+                                    </span>
                                 </div>
                             </div>
                             <div class="job-content">
-                                <p class="job-description">{{ Str::limit($job->description, 120) }}</p>
+                                <p class="job-description">
+                                    {{ Str::limit(app()->getLocale() === 'en' && $job->description_en ? $job->description_en : $job->description, 120) }}
+                                </p>
                                 <a href="{{ route('careers.show', $job) }}" class="job-cta">
-                                    اعرف المزيد
+                                    {{ __('careers.learn_more') }}
                                     <i class="fas fa-arrow-left"></i>
                                 </a>
                             </div>
@@ -340,8 +371,12 @@
                     <div class="no-jobs-icon">
                         <i class="fas fa-search"></i>
                     </div>
-                    <h3 style="color: var(--primary-navy); font-size: 1.7rem; margin-bottom: 1.2rem;">لا توجد وظائف متاحة حالياً</h3>
-                    <p style="color: var(--muted-blue); font-weight: 600; font-size: 1.1rem;">نحن نعمل باستمرار على توفير فرص عمل جديدة. تابعنا للحصول على آخر التحديثات.</p>
+                    <h3 style="color: var(--primary-navy); font-size: 1.7rem; margin-bottom: 1.2rem;">
+                        {{ __('careers.no_jobs') }}
+                    </h3>
+                    <p style="color: var(--muted-blue); font-weight: 600; font-size: 1.1rem;">
+                        {{ __('careers.no_jobs_text') }}
+                    </p>
                 </div>
             @endif
         </div>

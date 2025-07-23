@@ -1,11 +1,11 @@
 <section class="space-y-6" dir="rtl">
     <header>
         <h2 class="text-lg font-medium" style="color: #2c3e50;">
-            حذف الحساب
+            {{ __('profile.delete_account') }}
         </h2>
 
         <p class="mt-1 text-sm" style="color: #4f4f4f;">
-            بعد حذف حسابك، سيتم حذف جميع بياناتك ومواردك بشكل دائم. قبل حذف الحساب، يُرجى تنزيل أي بيانات أو معلومات ترغب في الاحتفاظ بها.
+            {{ __('profile.delete_account_description') }}
         </p>
     </header>
 
@@ -14,7 +14,7 @@
         x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
         style="background-color: #e74c3c; color: white;"
     >
-        حذف الحساب
+        {{ __('profile.delete_account') }}
     </x-danger-button>
 
     <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
@@ -23,22 +23,22 @@
             @method('delete')
 
             <h2 class="text-lg font-medium" style="color: #2c3e50;">
-                هل أنت متأكد من رغبتك في حذف حسابك؟
+                {{ __('profile.delete_confirmation_title') }}
             </h2>
 
             <p class="mt-1 text-sm" style="color: #4f4f4f;">
-                بعد حذف حسابك، سيتم حذف جميع بياناتك ومواردك بشكل دائم. يرجى إدخال كلمة المرور لتأكيد رغبتك في حذف الحساب نهائيًا.
+                {{ __('profile.delete_confirmation_description') }}
             </p>
 
             <div class="mt-6">
-                <x-input-label for="password" value="كلمة المرور" class="sr-only" />
+                <x-input-label for="password" :value="__('profile.password')" class="sr-only" />
 
                 <x-text-input
                     id="password"
                     name="password"
                     type="password"
                     class="mt-1 block w-3/4"
-                    placeholder="كلمة المرور"
+                    :placeholder="__('profile.password')"
                 />
 
                 <x-input-error :messages="$errors->userDeletion->get('password')" class="mt-2" />
@@ -46,11 +46,11 @@
 
             <div class="mt-6 flex justify-end" dir="ltr">
                 <x-secondary-button x-on:click="$dispatch('close')">
-                    إلغاء
+                    {{ __('profile.cancel') }}
                 </x-secondary-button>
 
                 <x-danger-button class="ms-3" style="background-color: #e74c3c; color: white;">
-                    حذف الحساب
+                    {{ __('profile.delete_account') }}
                 </x-danger-button>
             </div>
         </form>

@@ -656,6 +656,175 @@ body {
     border-radius: 9999px;
     transition: width 0.5s ease;
 }
+/* styles.css */
+body[dir="rtl"] {
+    direction: rtl;
+    text-align: right;
+}
+
+body[dir="ltr"] {
+    direction: ltr;
+    text-align: left;
+}
+
+/* Example: flip float and margin */
+[dir="rtl"] .float-left {
+    float: right !important;
+}
+
+[dir="rtl"] .ml-4 {
+    margin-left: 0 !important;
+    margin-right: 1rem !important;
+}
+/* RTL/LTR Navigation Styles */
+
+/* RTL specific styles */
+.navbar.rtl {
+    direction: rtl;
+}
+
+.navbar.rtl .nav-container {
+    flex-direction: row;
+}
+
+/* Logo direction adjustments */
+.navbar.rtl img[alt="Logo"] {
+    transform: scaleX(-1);
+    transition: transform 0.3s ease;
+}
+
+.navbar.ltr img[alt="Logo"] {
+    transform: scaleX(1);
+    transition: transform 0.3s ease;
+}
+
+/* Alternative logo flipping method using CSS */
+.logo-rtl {
+    transform: scaleX(-1);
+    transition: transform 0.3s ease;
+}
+
+.logo-ltr {
+    transform: scaleX(1);
+    transition: transform 0.3s ease;
+}
+
+/* LTR specific styles */
+.navbar.ltr {
+    direction: ltr;
+}
+
+.navbar.ltr .nav-container {
+    flex-direction: row;
+}
+
+/* Icon positioning for RTL */
+.navbar.rtl .fas.fa-sign-in-alt {
+    margin-left: 0.5rem;
+    margin-right: 0;
+}
+
+.navbar.ltr .fas.fa-sign-in-alt {
+    margin-right: 0.5rem;
+    margin-left: 0;
+}
+
+/* Dropdown arrow rotation for RTL */
+.navbar.rtl .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+/* Mobile menu animation */
+#mobile-menu {
+    transition: all 0.3s ease-in-out;
+}
+
+#mobile-menu.hidden {
+    max-height: 0;
+    opacity: 0;
+}
+
+#mobile-menu:not(.hidden) {
+    max-height: 500px;
+    opacity: 1;
+}
+
+/* Hamburger menu icon transition */
+#menu-toggle i {
+    transition: all 0.3s ease;
+}
+
+/* Language switcher styles */
+.nav-auth .flex.items-center.gap-2 a {
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    transition: all 0.2s ease;
+}
+
+.nav-auth .flex.items-center.gap-2 a:hover {
+    background-color: rgba(231, 76, 60, 0.1);
+}
+
+/* Active navigation link styles */
+.navbar ul li a.font-bold {
+    position: relative;
+}
+
+.navbar ul li a.font-bold::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #e74c3c;
+    border-radius: 1px;
+}
+
+/* RTL adjustments for active link underline */
+.navbar.rtl ul li a.font-bold::after {
+    right: 0;
+    left: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .navbar .nav-container {
+        flex-wrap: wrap;
+    }
+    
+    #mobile-menu ul li a,
+    #mobile-menu ul li button {
+        padding: 0.75rem 0;
+        display: block;
+        width: 100%;
+        text-align: inherit;
+    }
+    
+    .navbar.rtl #mobile-menu ul li a,
+    .navbar.rtl #mobile-menu ul li button {
+        text-align: right;
+    }
+    
+    .navbar.ltr #mobile-menu ul li a,
+    .navbar.ltr #mobile-menu ul li button {
+        text-align: left;
+    }
+}
+
+/* Smooth transitions for all interactive elements */
+.navbar a,
+.navbar button {
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+/* Focus states for accessibility */
+.navbar a:focus,
+.navbar button:focus {
+    outline: 2px solid #e74c3c;
+    outline-offset: 2px;
+    border-radius: 2px;
+}
 
 /* Responsive Design */
 @media (max-width: 768px) {

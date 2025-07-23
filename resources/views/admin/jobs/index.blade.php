@@ -2,46 +2,61 @@
 
 @section('content')
 
-<h1 class="text-2xl font-bold mb-4 text-[#e74c3c]">الوظائف</h1>
+<h1 class="text-2xl font-bold mb-4 text-[#e74c3c]">{{ __('adminjob.title') }}</h1>
 
-<a href="{{ route('admin.jobs.create') }}" class="btn-login mb-4 inline-block">إضافة وظيفة جديدة</a>
+<a href="{{ route('admin.jobs.create') }}" class="btn-login mb-4 inline-block">{{ __('adminjob.add_new') }}</a>
 
 @if(session('success'))
-    <div class="bg-green-100 text-green-800 p-3 rounded mb-4">{{ session('success') }}</div>
+    <div class="bg-green-100 text-green-800 p-3 rounded mb-4">{{ __('adminjob.success') }}</div>
 @endif
 
 <div class="overflow-x-auto">
     <table class="min-w-full bg-white shadow rounded text-sm">
         <thead class="bg-[#e74c3c] text-white">
             <tr>
-                <th class="p-2 whitespace-nowrap">#</th>
-                <th class="p-2 whitespace-nowrap">العنوان</th>
-                <th class="p-2 whitespace-nowrap">الموقع</th>
-                <th class="p-2 whitespace-nowrap">النوع</th>
-                <th class="p-2 whitespace-nowrap">الموعد النهائي</th>
-                <th class="p-2 whitespace-nowrap">الحالة</th>
-                <th class="p-2 whitespace-nowrap">الإجراءات</th>
+                <th class="p-2 whitespace-nowrap">{{ __('adminjob.id') }}</th>
+                <th class="p-2 whitespace-nowrap">{{ __('adminjob.job_title') }}</th>
+                <th class="p-2 whitespace-nowrap">{{ __('adminjob.location') }}</th>
+                <th class="p-2 whitespace-nowrap">{{ __('adminjob.type') }}</th>
+                <th class="p-2 whitespace-nowrap">{{ __('adminjob.deadline') }}</th>
+                <th class="p-2 whitespace-nowrap">{{ __('adminjob.status') }}</th>
+                <th class="p-2 whitespace-nowrap">{{ __('adminjob.actions') }}</th>
             </tr>
         </thead>
         <tbody>
             @foreach($jobs as $index => $job)
             <tr class="border-t hover:bg-gray-50 text-center">
                 <td class="p-2">{{ $index + 1 }}</td>
-                <td class="p-2">{{ $job->title }}</td>
-                <td class="p-2">{{ $job->location ?? '-' }}</td>
-                <td class="p-2">{{ $job->type }}</td>
-                <td class="p-2">{{ $job->deadline ? $job->deadline->format('Y-m-d') : '-' }}</td>
+                <td class="p-2">
+                    {{ app()->getLocale() === 'ar' ? $job->title : ($job->title_en ?? $job->title) }}
+                </td>
+                <td class="p-2">
+                    {{ app()->getLocale() === 'ar' ? $job->location : ($job->location_en ?? $job->location) }}
+                </td>
+                <td class="p-2">
+                    @php
+                        $types = [
+                            'دوام كامل' => ['ar' => 'دوام كامل', 'en' => 'Full Time'],
+                            'دوام جزئي' => ['ar' => 'دوام جزئي', 'en' => 'Part Time'],
+                            'متطوع'     => ['ar' => 'متطوع', 'en' => 'Volunteer'],
+                        ];
+                    @endphp
+                    {{ $types[$job->type][app()->getLocale()] ?? $job->type }}
+                </td>
+                <td class="p-2">
+                    {{ $job->deadline ? \Carbon\Carbon::parse($job->deadline)->locale(app()->getLocale())->isoFormat('LL') : '-' }}
+                </td>
                 <td class="p-2">
                     <span class="px-2 py-1 text-xs rounded {{ $job->is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
-                        {{ $job->is_active ? 'نشطة' : 'غير نشطة' }}
+                        {{ $job->is_active ? __('adminjob.active') : __('adminjob.inactive') }}
                     </span>
                 </td>
                 <td class="p-2">
-                    <a href="{{ route('admin.jobs.edit', $job->id) }}" class="btn-action btn-edit">تعديل</a>
-                    <form action="{{ route('admin.jobs.destroy', $job->id) }}" method="POST" class="inline-block" onsubmit="return confirm('هل أنت متأكد من الحذف؟')">
+                    <a href="{{ route('admin.jobs.edit', $job->id) }}" class="btn-action btn-edit">{{ __('adminjob.edit') }}</a>
+                    <form action="{{ route('admin.jobs.destroy', $job->id) }}" method="POST" class="inline-block" onsubmit="return confirm('{{ __('adminjob.confirm_delete') }}')">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn-action btn-delete">حذف</button>
+                        <button type="submit" class="btn-action btn-delete">{{ __('adminjob.delete') }}</button>
                     </form>
                 </td>
             </tr>
@@ -94,7 +109,6 @@
         background-color: #dc2626;
     }
 
-    /* Responsive text size (optional) */
     @media (max-width: 640px) {
         h1 {
             font-size: 1.25rem;

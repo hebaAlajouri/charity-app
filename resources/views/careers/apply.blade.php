@@ -1,14 +1,14 @@
 <x-app-layout>
     <style>
         :root {
-            --primary-navy: #2C3E50;           /* Soft Deep Blue */
-            --primary-gold: #C9B458;           /* Soft Muted Gold */
-            --accent-navy: #7EB6C1;            /* Baby Blue - Calm */
-            --accent-gold: #E3D58A;            /* Soft Warm Gold */
-            --light-gold: #F5F9FA;             /* Very Light Blue-Gray */
-            --dark-navy: #1F2F3A;              /* Dark Navy */
-            --muted-blue: #A6C1D9;             /* Light Dusty Baby Blue */
-            --soft-beige: #D4E6E8;             /* Pale Baby Blue Tint */
+            --primary-navy: #2C3E50;
+            --primary-gold: #C9B458;
+            --accent-navy: #7EB6C1;
+            --accent-gold: #E3D58A;
+            --light-gold: #F5F9FA;
+            --dark-navy: #1F2F3A;
+            --muted-blue: #A6C1D9;
+            --soft-beige: #D4E6E8;
             --gold-gradient: linear-gradient(45deg, #C9B458, #E3D58A);
         }
 
@@ -79,15 +79,18 @@
         }
     </style>
 
-    <div class="min-h-screen flex items-center justify-center rtl">
+    <div class="min-h-screen flex items-center justify-center {{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
         <div class="apply-container">
-            <h2>التقديم على وظيفة: {{ $job->title }}</h2>
-            <p>للتقديم على هذه الوظيفة، يرجى إرسال سيرتك الذاتية إلى البريد الإلكتروني التالي:</p>
+      <h1 class="text-3xl font-bold mb-4">
+    {{ app()->getLocale() === 'en' ? $job->title_en : $job->title }}
+</h1>
+
+            <p>{{ __('careersapply.apply_instruction') }}</p>
             <div class="email-box">📧 {{ $hrEmail }}</div>
-            <p class="note">يُرجى ذكر اسم الوظيفة في عنوان الرسالة (Subject) عند الإرسال.</p>
+            <p class="note">{{ __('careersapply.apply_note') }}</p>
 
             <a href="{{ route('careers.show', $job) }}" class="back-link">
-                ← العودة إلى تفاصيل الوظيفة
+                {{ __('careersapply.back_to_job') }}
             </a>
         </div>
     </div>

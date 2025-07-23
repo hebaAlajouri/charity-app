@@ -126,7 +126,7 @@
     <div class="main-container">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-12">
-                <h1 class="main-title">تواصل معنا لأي استفسارات</h1>
+                <h1 class="main-title">{{ __('contact.title') }}</h1>
                 <div class="title-underline"></div>
             </div>
 
@@ -149,36 +149,36 @@
 
                             <div class="grid md:grid-cols-2 gap-6">
                                 <div>
-                                    <label class="form-label">الاسم الكامل *</label>
-                                    <input type="text" name="name" class="form-input" placeholder="أدخل اسمك الكامل" required>
+                                    <label class="form-label">{{ __('contact.name') }}</label>
+                                    <input type="text" name="name" class="form-input" placeholder="{{ __('contact.name_placeholder') }}" required>
                                 </div>
 
                                 <div>
-                                    <label class="form-label">البريد الإلكتروني *</label>
-                                    <input type="email" name="email" class="form-input" placeholder="example@email.com" required>
+                                    <label class="form-label">{{ __('contact.email') }}</label>
+                                    <input type="email" name="email" class="form-input" placeholder="{{ __('contact.email_placeholder') }}" required>
                                 </div>
                             </div>
 
                             <div class="grid md:grid-cols-2 gap-6">
                                 <div>
-                                    <label class="form-label">الموضوع</label>
-                                    <input type="text" name="subject" class="form-input" placeholder="موضوع الرسالة">
+                                    <label class="form-label">{{ __('contact.subject') }}</label>
+                                    <input type="text" name="subject" class="form-input" placeholder="{{ __('contact.subject_placeholder') }}">
                                 </div>
 
                                 <div>
-                                    <label class="form-label">رقم الهاتف</label>
-                                    <input type="text" name="phone" class="form-input" placeholder="079 XXXX XXX">
+                                    <label class="form-label">{{ __('contact.phone') }}</label>
+                                    <input type="text" name="phone" class="form-input" placeholder="{{ __('contact.phone_placeholder') }}">
                                 </div>
                             </div>
 
                             <div>
-                                <label class="form-label">الرسالة *</label>
-                                <textarea name="message" class="form-textarea" placeholder="اكتب رسالتك هنا..." required></textarea>
+                                <label class="form-label">{{ __('contact.message') }}</label>
+                                <textarea name="message" class="form-textarea" placeholder="{{ __('contact.message_placeholder') }}" required></textarea>
                             </div>
 
                             <div class="pt-4">
                                 <button type="submit" class="gradient-button">
-                                    <span>إرسال الرسالة</span>
+                                    <span>{{ __('contact.submit') }}</span>
                                     <span>🚀</span>
                                 </button>
                             </div>

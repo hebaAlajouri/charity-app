@@ -335,6 +335,17 @@
             color: var(--primary-navy);
             font-size: 2.5rem;
         }
+[dir="rtl"] body {
+    font-family: 'Cairo', sans-serif;
+    direction: rtl;
+    text-align: right;
+}
+
+[dir="ltr"] body {
+    font-family: 'Poppins', sans-serif;
+    direction: ltr;
+    text-align: left;
+}
 
         /* ===== Responsive ===== */
         @media (max-width: 768px) {
@@ -362,46 +373,51 @@
         }
     </style>
 
-    <!-- Hero Section -->
     <div class="news-hero rtl">
         <div class="news-hero-content">
-            <h1>آخر الأخبار</h1>
-            <p>تابع أحدث الأخبار والتطورات والإعلانات المهمة من فريقنا</p>
+            <h1>@lang('news.hero_title')</h1>
+            <p>@lang('news.hero_subtitle')</p>
         </div>
     </div>
 
-    <!-- Main Content -->
-    <div class="news-section rtl">
+     <div class="news-section rtl">
         <div class="news-container">
             @if($news->count() > 0)
                 <!-- News Statistics -->
-                <div class="news-stats" aria-label="إحصائيات الأخبار">
+                <div class="news-stats" aria-label="@lang('news.total_news')">
                     <div class="stat-item">
                         <div class="stat-number">{{ $news->total() }}</div>
-                        <div class="stat-label">إجمالي الأخبار</div>
+                        <div class="stat-label">@lang('news.total_news')</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-number">{{ $news->count() }}</div>
-                        <div class="stat-label">الأخبار المعروضة</div>
+                        <div class="stat-label">@lang('news.news_displayed')</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-number">{{ $news->lastPage() }}</div>
-                        <div class="stat-label">عدد الصفحات</div>
+                        <div class="stat-label">@lang('news.total_pages')</div>
                     </div>
                 </div>
 
+                <!-- News Grid -->
                 <div class="news-grid" role="list">
                     @foreach($news as $index => $article)
+                        @php
+                            $title = app()->getLocale() === 'en' && $article->title_en ? $article->title_en : $article->title;
+                            $content = app()->getLocale() === 'en' && $article->content_en ? $article->content_en : $article->content;
+                        @endphp
+
                         <div class="news-card" role="listitem" style="position: relative;">
                             @if($index === 0)
-                                <div class="featured-badge" aria-label="خبر مميز">
+                                <div class="featured-badge" aria-label="@lang('news.featured')">
                                     <i class="fas fa-star" aria-hidden="true"></i>
-                                    خبر مميز
+                                    @lang('news.featured')
                                 </div>
                             @endif
+
                             <div class="news-image">
                                 @if($article->image)
-                                    <img src="{{ asset('storage/' . $article->image) }}" alt="{{ $article->title }}">
+                                    <img src="{{ asset('storage/' . $article->image) }}" alt="{{ $title }}">
                                     <div class="news-image-overlay" aria-hidden="true">
                                         <i class="fas fa-eye"></i>
                                     </div>
@@ -411,18 +427,23 @@
                                     </div>
                                 @endif
                             </div>
+
                             <div class="news-content">
-                                <h2 class="news-title">{{ $article->title }}</h2>
-                                <p class="news-excerpt">{{ Str::limit($article->content, 100) }}</p>
+                                <h2 class="news-title">{{ $title }}</h2>
+                                <p class="news-excerpt">{{ Str::limit($content, 100) }}</p>
+
                                 <div class="news-meta">
                                     <span class="news-date">
                                         <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                                        {{ $article->created_at ? $article->created_at->format('d-m-Y') : 'اليوم' }}
+                                        {{ $article->created_at ? $article->created_at->format('d-m-Y') : now()->format('d-m-Y') }}
                                     </span>
-                                    <span class="news-category">أخبار</span>
+                                    <span class="news-category">@lang('news.news')</span>
                                 </div>
-                                <a href="{{ route('news.show', $article) }}" class="news-read-more" aria-label="اقرأ المزيد عن {{ $article->title }}">
-                                    اقرأ المزيد
+
+                                <a href="{{ route('news.show', $article) }}"
+                                   class="news-read-more"
+                                   aria-label="@lang('news.read_more') عن {{ $title }}">
+                                    @lang('news.read_more')
                                     <i class="fas fa-arrow-left" aria-hidden="true"></i>
                                 </a>
                             </div>
@@ -430,6 +451,7 @@
                     @endforeach
                 </div>
 
+                <!-- Pagination -->
                 <div class="pagination-wrapper" role="navigation" aria-label="تنقل الصفحات">
                     {{ $news->links() }}
                 </div>
@@ -438,8 +460,8 @@
                     <div class="no-news-icon" aria-hidden="true">
                         <i class="fas fa-newspaper"></i>
                     </div>
-                    <h3>لا توجد أخبار متاحة حالياً</h3>
-                    <p>نحن نعمل على إضافة أخبار جديدة قريباً. تابعنا للحصول على آخر التحديثات.</p>
+                    <h3>@lang('news.no_news_title')</h3>
+                    <p>@lang('news.no_news_text')</p>
                 </div>
             @endif
         </div>

@@ -22,126 +22,128 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('orphan.store') }}" class="p-6 rounded-lg shadow-lg space-y-6" style="background-color: white;">
+        <form method="POST" action="{{ route('orphan.store') }}" class="p-6 rounded-lg shadow-lg space-y-6 bg-white">
             @csrf
 
-            <h2 class="text-2xl font-bold" style="color: var(--primary-gold)">بيانات ولي الأمر</h2>
+            <h2 class="text-2xl font-bold text-primary">{{ __('orphan.guardian_info') }}</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 @foreach([
-                    'guardian_name' => 'اسم ولي الأمر',
-                    'guardian_phone' => 'رقم الهاتف',
-                    'guardian_email' => 'البريد الإلكتروني',
-                    'guardian_id_number' => 'رقم الهوية',
-                    'guardian_relationship' => 'صلة القرابة',
-                    'guardian_address' => 'العنوان الكامل',
-                    'guardian_city' => 'المدينة',
-                    'guardian_country' => 'الدولة'
-                ] as $name => $placeholder)
-                    <input type="{{ $name === 'guardian_email' ? 'email' : 'text' }}"
-                           name="{{ $name }}"
+                    'guardian_name',
+                    'guardian_phone',
+                    'guardian_email',
+                    'guardian_id_number',
+                    'guardian_relationship',
+                    'guardian_address',
+                    'guardian_city',
+                    'guardian_country'
+                ] as $field)
+                    <input type="{{ $field === 'guardian_email' ? 'email' : 'text' }}"
+                           name="{{ $field }}"
                            class="form-input"
                            style="border-color: var(--muted-blue); background-color: var(--soft-beige);"
-                           placeholder="{{ $placeholder }}"
-                           value="{{ old($name, $name === 'guardian_country' ? 'السعودية' : '') }}"
+                           placeholder="{{ __('orphan.' . $field) }}"
+                           value="{{ old($field, $field === 'guardian_country' ? __('orphan.guardian_country') : '') }}"
                            required>
                 @endforeach
             </div>
 
-            <h2 class="text-2xl font-bold" style="color: var(--primary-gold)">بيانات اليتيم</h2>
+            <h2 class="text-2xl font-bold text-primary">{{ __('orphan.orphan_info') }}</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <input type="text" name="orphan_name" class="form-input" placeholder="اسم اليتيم" value="{{ old('orphan_name') }}" required>
+                <input type="text" name="orphan_name" class="form-input" placeholder="{{ __('orphan.orphan_name') }}" value="{{ old('orphan_name') }}" required>
                 <input type="date" name="orphan_birth_date" class="form-input" value="{{ old('orphan_birth_date') }}" required>
                 <select name="orphan_gender" class="form-select bg-white border border-muted-blue" required>
-                    <option value="">الجنس</option>
-                    <option value="ذكر" {{ old('orphan_gender') == 'ذكر' ? 'selected' : '' }}>ذكر</option>
-                    <option value="أنثى" {{ old('orphan_gender') == 'أنثى' ? 'selected' : '' }}>أنثى</option>
+                    <option value="">{{ __('orphan.orphan_gender') }}</option>
+                    <option value="ذكر" {{ old('orphan_gender') == 'ذكر' ? 'selected' : '' }}>{{ __('orphan.male') }}</option>
+                    <option value="أنثى" {{ old('orphan_gender') == 'أنثى' ? 'selected' : '' }}>{{ __('orphan.female') }}</option>
                 </select>
                 @foreach([
-                    'orphan_id_number' => 'رقم الهوية (إن وجد)',
-                    'orphan_nationality' => 'الجنسية',
-                    'orphan_address' => 'العنوان',
-                    'orphan_city' => 'المدينة'
-                ] as $name => $placeholder)
+                    'orphan_id_number',
+                    'orphan_nationality',
+                    'orphan_address',
+                    'orphan_city'
+                ] as $field)
                     <input type="text"
-                           name="{{ $name }}"
+                           name="{{ $field }}"
                            class="form-input"
                            style="border-color: var(--muted-blue); background-color: var(--soft-beige);"
-                           placeholder="{{ $placeholder }}"
-                           value="{{ old($name, $name === 'orphan_nationality' ? 'سعودي' : '') }}"
+                           placeholder="{{ __('orphan.' . $field) }}"
+                           value="{{ old($field, $field === 'orphan_nationality' ? __('orphan.saudi') : '') }}"
                            required>
                 @endforeach
             </div>
 
-            <h2 class="text-2xl font-bold" style="color: var(--primary-gold)">بيانات الأب</h2>
+            <h2 class="text-2xl font-bold text-primary">{{ __('orphan.father_info') }}</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 @foreach([
-                    'father_name' => 'اسم الأب',
-                    'father_death_date' => 'تاريخ الوفاة',
-                    'father_death_cause' => 'سبب الوفاة',
-                    'father_id_number' => 'رقم الهوية',
-                    'father_job_before_death' => 'وظيفته قبل الوفاة'
-                ] as $name => $placeholder)
-                    <input type="{{ $name === 'father_death_date' ? 'date' : 'text' }}"
-                           name="{{ $name }}"
+                    'father_name',
+                    'father_death_date',
+                    'father_death_cause',
+                    'father_id_number',
+                    'father_job_before_death'
+                ] as $field)
+                    <input type="{{ $field === 'father_death_date' ? 'date' : 'text' }}"
+                           name="{{ $field }}"
                            class="form-input"
                            style="border-color: var(--muted-blue); background-color: var(--soft-beige);"
-                           placeholder="{{ $placeholder }}"
-                           value="{{ old($name) }}"
+                           placeholder="{{ __('orphan.' . $field) }}"
+                           value="{{ old($field) }}"
                            required>
                 @endforeach
             </div>
 
-            <h2 class="text-2xl font-bold" style="color: var(--primary-gold)">الوضع المالي</h2>
+            <h2 class="text-2xl font-bold text-primary">{{ __('orphan.financial_status') }}</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <input type="number" name="monthly_income" class="form-input" placeholder="الدخل الشهري" value="{{ old('monthly_income') }}" required>
-                <input type="text" name="income_source" class="form-input" placeholder="مصدر الدخل" value="{{ old('income_source') }}">
-                <input type="number" name="family_members_count" class="form-input" placeholder="عدد أفراد الأسرة" value="{{ old('family_members_count') }}" required>
-                <textarea name="financial_situation_description" class="form-input" placeholder="وصف الحالة المالية" required>{{ old('financial_situation_description') }}</textarea>
+                <input type="number" name="monthly_income" class="form-input" placeholder="{{ __('orphan.monthly_income') }}" value="{{ old('monthly_income') }}" required>
+                <input type="text" name="income_source" class="form-input" placeholder="{{ __('orphan.income_source') }}" value="{{ old('income_source') }}">
+                <input type="number" name="family_members_count" class="form-input" placeholder="{{ __('orphan.family_members_count') }}" value="{{ old('family_members_count') }}" required>
+                <textarea name="financial_situation_description" class="form-input" placeholder="{{ __('orphan.financial_situation_description') }}" required>{{ old('financial_situation_description') }}</textarea>
             </div>
 
-            <h2 class="text-2xl font-bold" style="color: var(--primary-gold)">السكن</h2>
+            <h2 class="text-2xl font-bold text-primary">{{ __('orphan.housing') }}</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <select name="housing_type" class="form-select bg-white border border-muted-blue" required>
-                    <option value="">نوع السكن</option>
+                    <option value="">{{ __('orphan.housing_type') }}</option>
                     @foreach(['ملك', 'إيجار', 'مع الأقارب', 'أخرى'] as $type)
-                        <option value="{{ $type }}" {{ old('housing_type') == $type ? 'selected' : '' }}>{{ $type }}</option>
+                        <option value="{{ $type }}" {{ old('housing_type') == $type ? 'selected' : '' }}>{{ __('orphan.housing_type_' . $type) }}</option>
                     @endforeach
                 </select>
-                <input type="number" name="monthly_rent" class="form-input" placeholder="الإيجار الشهري (إن وجد)" value="{{ old('monthly_rent') }}">
-                <textarea name="housing_description" class="form-input" placeholder="وصف السكن" required>{{ old('housing_description') }}</textarea>
+                <input type="number" name="monthly_rent" class="form-input" placeholder="{{ __('orphan.monthly_rent') }}" value="{{ old('monthly_rent') }}">
+                <textarea name="housing_description" class="form-input" placeholder="{{ __('orphan.housing_description') }}" required>{{ old('housing_description') }}</textarea>
             </div>
 
-            <h2 class="text-2xl font-bold" style="color: var(--primary-gold)">الصحة والتعليم</h2>
+            <h2 class="text-2xl font-bold text-primary">{{ __('orphan.health_education') }}</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <label class="flex items-center gap-2">
                     <input type="checkbox" name="has_health_issues" value="1" {{ old('has_health_issues') ? 'checked' : '' }}>
-                    يعاني من مشاكل صحية؟
+                    {{ __('orphan.has_health_issues') }}
                 </label>
-                <textarea name="health_issues_description" class="form-input">{{ old('health_issues_description') }}</textarea>
+                <textarea name="health_issues_description" class="form-input" placeholder="{{ __('orphan.health_issues_description') }}">{{ old('health_issues_description') }}</textarea>
+
                 <label class="flex items-center gap-2">
                     <input type="checkbox" name="needs_medical_care" value="1" {{ old('needs_medical_care') ? 'checked' : '' }}>
-                    يحتاج إلى رعاية طبية؟
+                    {{ __('orphan.needs_medical_care') }}
                 </label>
-                <textarea name="medical_care_description" class="form-input">{{ old('medical_care_description') }}</textarea>
-                <input type="text" name="education_level" class="form-input" placeholder="المرحلة الدراسية" value="{{ old('education_level') }}" required>
-                <input type="text" name="school_name" class="form-input" placeholder="اسم المدرسة (إن وجد)" value="{{ old('school_name') }}">
+                <textarea name="medical_care_description" class="form-input" placeholder="{{ __('orphan.medical_care_description') }}">{{ old('medical_care_description') }}</textarea>
+
+                <input type="text" name="education_level" class="form-input" placeholder="{{ __('orphan.education_level') }}" value="{{ old('education_level') }}" required>
+                <input type="text" name="school_name" class="form-input" placeholder="{{ __('orphan.school_name') }}" value="{{ old('school_name') }}">
                 <label class="flex items-center gap-2">
                     <input type="checkbox" name="needs_educational_support" value="1" {{ old('needs_educational_support') ? 'checked' : '' }}>
-                    يحتاج إلى دعم تعليمي؟
+                    {{ __('orphan.needs_educational_support') }}
                 </label>
-                <textarea name="educational_needs_description" class="form-input">{{ old('educational_needs_description') }}</textarea>
+                <textarea name="educational_needs_description" class="form-input" placeholder="{{ __('orphan.educational_needs_description') }}">{{ old('educational_needs_description') }}</textarea>
             </div>
 
-            <h2 class="text-2xl font-bold" style="color: var(--primary-gold)">معلومات إضافية</h2>
+            <h2 class="text-2xl font-bold text-primary">{{ __('orphan.additional_info') }}</h2>
             <div class="space-y-4">
-                <textarea name="special_circumstances" class="form-input">{{ old('special_circumstances') }}</textarea>
-                <textarea name="additional_notes" class="form-input">{{ old('additional_notes') }}</textarea>
-                <textarea name="support_needed" class="form-input" required>{{ old('support_needed') }}</textarea>
+                <textarea name="special_circumstances" class="form-input" placeholder="{{ __('orphan.special_circumstances') }}">{{ old('special_circumstances') }}</textarea>
+                <textarea name="additional_notes" class="form-input" placeholder="{{ __('orphan.additional_notes') }}">{{ old('additional_notes') }}</textarea>
+                <textarea name="support_needed" class="form-input" placeholder="{{ __('orphan.support_needed') }}" required>{{ old('support_needed') }}</textarea>
             </div>
 
             <div class="submit-section pt-6 text-center">
                 <button type="submit" class="submit-btn text-white font-bold py-2 px-6 rounded" style="background: var(--gold-gradient);">
-                    <i class="fas fa-paper-plane ml-2"></i> إرسال الطلب
+                    <i class="fas fa-paper-plane ml-2"></i> {{ __('orphan.submit_request') }}
                 </button>
             </div>
         </form>

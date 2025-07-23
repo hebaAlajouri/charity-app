@@ -1,0 +1,27 @@
+<?php
+
+return [
+    'sponsor_info_title'      => 'Sponsor Information',
+    'sponsor_info_desc'       => 'Please fill out all data accurately',
+    'personal_data'           => 'Personal Data',
+    'sponsor_name'            => 'Sponsor Name',
+    'country'                 => 'Country',
+    'phone'                   => 'Phone Number',
+    'email'                   => 'Email',
+    'start_date'              => 'Start Date',
+    'sponsorship_details'     => 'Sponsorship Details',
+    'orphan_count'            => 'Number of Orphans',
+    'orphan_count_placeholder'=> 'Number of Orphans',
+    'orphan_1'                => '1',
+    'orphan_2'                => '2',
+    'orphan_3_plus'           => 'More than 2',
+    'sponsoring_for'          => 'Sponsoring For',
+    'sponsorship_type'        => 'Sponsorship Type',
+    'sponsorship_type_monthly'=> 'Monthly',
+    'sponsorship_type_yearly' => 'Yearly',
+    'sponsorship_type_once'   => 'One Time',
+    'select_orphans'          => 'Select Orphans to Sponsor',
+    'view_profile'            => 'View Profile',
+    'no_orphans'              => 'No orphans available currently.',
+    'submit'                  => 'Submit Request',
+];

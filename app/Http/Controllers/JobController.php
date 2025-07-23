@@ -22,10 +22,34 @@ public function show(Job $job) {
 
 // للمدير:
 public function create() { return view('admin.jobs.create'); }
-public function store(Request $r) { /* validate + create job ... */ }
-public function edit(Job $job) { return view('admin.jobs.edit', compact('job')); }
-public function update(Request $r, Job $job){ /* update */ }
-public function destroy(Job $job){ $job->delete(); }
+public function store(Request $request)
+{
+    $validatedData = $request->validate([
+        'title' => 'required|string|max:255',
+        'title_en' => 'nullable|string|max:255',
+        'location' => 'nullable|string|max:255',
+        'location_en' => 'nullable|string|max:255',
+        'description' => 'required|string',
+        'description_en' => 'nullable|string',
+        'type' => 'required|in:دوام كامل,دوام جزئي,متطوع',
+        'deadline' => 'nullable|date',
+        'is_active' => 'sometimes|boolean',
+    ]);
+
+    $job = Job::create([
+        'title' => $validatedData['title'],
+        'title_en' => $validatedData['title_en'] ?? null,
+        'location' => $validatedData['location'] ?? null,
+        'location_en' => $validatedData['location_en'] ?? null,
+        'description' => $validatedData['description'],
+        'description_en' => $validatedData['description_en'] ?? null,
+        'type' => $validatedData['type'],
+        'deadline' => $validatedData['deadline'] ?? null,
+        'is_active' => $validatedData['is_active'] ?? true,
+    ]);
+
+    return redirect()->route('admin.jobs.index')->with('success', 'Job created successfully.');
+}
 public function apply($id)
 {
     $job = Job::findOrFail($id);
@@ -33,5 +57,4 @@ public function apply($id)
 
     return view('careers.apply', compact('job', 'hrEmail'));
 }
-
 }

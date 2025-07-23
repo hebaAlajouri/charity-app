@@ -150,6 +150,179 @@
         }
     </style>
 
-    {{-- Content from your blade view --}}
-    {{-- Your <div class="profile-container"> ... remains unchanged --}}
+   <div class="profile-container">
+        <div class="profile-card">
+            <div class="profile-header">
+                <h2 class="profile-title">@lang('orphanprofile.profile_title'): {{ $orphan->name }}</h2>
+                <p class="profile-subtitle">@lang('orphanprofile.profile_subtitle')</p>
+            </div>
+
+            @php $app = $orphan->application; @endphp
+
+            <div class="profile-content">
+                <div class="info-grid">
+                    <div class="info-item highlight-item">
+                        <div class="info-label">@lang('orphanprofile.name')</div>
+                        <div class="info-value">{{ $orphan->name }}</div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-label">@lang('orphanprofile.age')</div>
+                        <div class="info-value">{{ $orphan->age }} سنة</div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-label">@lang('orphanprofile.status')</div>
+                        <div class="info-value">
+                            <span class="status-badge {{ $orphan->status === 'available' ? 'status-available' : 'status-sponsored' }}">
+                                @lang('orphanprofile.' . ($orphan->status === 'available' ? 'available' : 'sponsored'))
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-label">@lang('orphanprofile.guardian_phone')</div>
+                        <div class="info-value">{{ $orphan->guardian_phone }}</div>
+                    </div>
+
+                    <div class="info-item full-width">
+                        <div class="info-label">@lang('orphanprofile.address')</div>
+                        <div class="info-value">{{ $orphan->address }}</div>
+                    </div>
+
+                    @if($app)
+                        <div class="section-divider"></div>
+
+                        <div class="info-item">
+                            <div class="info-label">@lang('orphanprofile.gender')</div>
+                            <div class="info-value">{{ $app->orphan_gender }}</div>
+                        </div>
+
+                       <div class="info-item">
+    <div class="info-label">@lang('orphanprofile.city')</div>
+    <div class="info-value">
+        {{ app()->getLocale() === 'en' ? ($app->orphan_city_en ?? $app->orphan_city) : $app->orphan_city }}
+    </div>
+</div>
+
+
+                        <div class="info-item">
+                            <div class="info-label">@lang('orphanprofile.nationality')</div>
+                            <div class="info-value">{{ $app->orphan_nationality }}</div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-label">@lang('orphanprofile.father_name')</div>
+                            <div class="info-value">{{ $app->father_name }}</div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-label">@lang('orphanprofile.father_death_date')</div>
+                            <div class="info-value">{{ $app->father_death_date }}</div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-label">@lang('orphanprofile.father_death_cause')</div>
+                            <div class="info-value">{{ $app->father_death_cause }}</div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-label">@lang('orphanprofile.father_job_before_death')</div>
+                            <div class="info-value">{{ $app->father_job_before_death }}</div>
+                        </div>
+
+                        <div class="info-item highlight-item">
+                            <div class="info-label">@lang('orphanprofile.monthly_income')</div>
+                            <div class="info-value">{{ number_format($app->monthly_income, 2) }} ريال</div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-label">@lang('orphanprofile.family_members_count')</div>
+                            <div class="info-value">{{ $app->family_members_count }}</div>
+                        </div>
+
+                        <div class="info-item full-width">
+                            <div class="info-label">@lang('orphanprofile.financial_situation_description')</div>
+                            <div class="info-value">{{ $app->financial_situation_description }}</div>
+                        </div>
+
+                     <div class="info-item">
+    <div class="info-label">@lang('orphanprofile.housing_type')</div>
+    <div class="info-value">
+        {{ app()->getLocale() === 'en' ? ($app->housing_type_en ?? $app->housing_type) : $app->housing_type }}
+    </div>
+</div>
+
+
+                        <div class="info-item">
+                            <div class="info-label">@lang('orphanprofile.monthly_rent')</div>
+                            <div class="info-value">{{ $app->monthly_rent ?? 'لا يوجد' }}</div>
+                        </div>
+
+                        <div class="info-item {{ $app->has_health_issues ? 'warning-item' : '' }}">
+                            <div class="info-label">@lang('orphanprofile.has_health_issues')</div>
+                            <div class="info-value">{{ $app->has_health_issues ? __('نعم') : __('لا') }}</div>
+                        </div>
+
+                        @if($app->has_health_issues)
+                            <div class="info-item full-width warning-item">
+                                <div class="info-label">@lang('orphanprofile.health_issues_description')</div>
+                                <div class="info-value">{{ $app->health_issues_description }}</div>
+                            </div>
+                        @endif
+
+                        <div class="info-item">
+                            <div class="info-label">@lang('orphanprofile.needs_medical_care')</div>
+                            <div class="info-value">{{ $app->needs_medical_care ? __('نعم') : __('لا') }}</div>
+                        </div>
+<div class="info-item">
+    <div class="info-label">@lang('orphanprofile.education_level')</div>
+    <div class="info-value">
+        {{ app()->getLocale() === 'en' ? ($app->education_level_en ?? $app->education_level) : $app->education_level }}
+    </div>
+</div>
+
+
+                        <div class="info-item">
+                            <div class="info-label">@lang('orphanprofile.school_name')</div>
+                            <div class="info-value">{{ $app->school_name }}</div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-label">@lang('orphanprofile.needs_educational_support')</div>
+                            <div class="info-value">{{ $app->needs_educational_support ? __('نعم') : __('لا') }}</div>
+                        </div>
+
+                        <div class="info-item full-width">
+                            <div class="info-label">@lang('orphanprofile.educational_needs_description')</div>
+                            <div class="info-value">{{ $app->educational_needs_description }}</div>
+                        </div>
+
+                        <div class="info-item full-width">
+                            <div class="info-label">@lang('orphanprofile.special_circumstances')</div>
+                            <div class="info-value">{{ $app->special_circumstances }}</div>
+                        </div>
+
+                        <div class="info-item full-width">
+                            <div class="info-label">@lang('orphanprofile.additional_notes')</div>
+                            <div class="info-value">{{ $app->additional_notes }}</div>
+                        </div>
+
+                        <div class="info-item full-width highlight-item">
+                            <div class="info-label">@lang('orphanprofile.support_needed')</div>
+                            <div class="info-value">{{ $app->support_needed }}</div>
+                        </div>
+                    @else
+                        <div class="error-message">
+                            @lang('orphanprofile.no_application')
+                        </div>
+                    @endif
+                </div>
+
+                <div class="action-buttons">
+                    <a href="{{ route('sponsorship.index') }}" class="btn btn-back">@lang('orphanprofile.back')</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </x-app-layout>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}"dir="rtl">
+
+    <html lang="{{ app()->getLocale() }}" dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -42,41 +43,40 @@
         <div class="footer-content grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
             <!-- About -->
             <div class="footer-section">
-                <h3 class="text-lg font-bold text-[#f39c12] mb-3">من نحن</h3>
-                <p class="text-sm text-[#bdc3c7] leading-relaxed">
-                    جمعية فرسان الريادة هي جمعية خيرية تهدف لرعاية الأيتام ودعم المشاريع الإنسانية.             </p>
+                <h3 class="text-lg font-bold text-[#f39c12] mb-3">{{ __('app.about_us') }}</h3>
+     <p class="text-sm text-[#bdc3c7] leading-relaxed">
+    {{ __('app.about_description') }}
+</p>
             </div>
 
             <!-- Quick Links -->
             <div class="footer-section">
-                <h3 class="text-lg font-bold text-[#f39c12] mb-3">روابط سريعة</h3>
-                <ul class="space-y-2 text-sm">
-                 
-
-                       <li><a href="{{ route('careers.index') }}" class="hover:text-[#f39c12]">وظائف</a></li>
-            <li><a href="{{ route('projects') }}" class="hover:text-[#f39c12]">مشاريعنا</a></li>
-            <li><a href="{{ route('reports.index') }}" class="hover:text-[#f39c12]">تقارير</a></li>
-            <li><a href="{{ route('contact.form') }}" class="hover:text-[#f39c12]">تواصل</a></li>
-            <li><a href="{{ route('news.index') }}"class="hover:text-[#f39c12]">أخبار</a></li>
-            <li><a href="{{ route('orphan.create') }}" class="hover:text-[#f39c12]">طلب استفادة</a></li>
-                </ul>
+                <h3 class="text-lg font-bold text-[#f39c12] mb-3">{{ __('app.quick_links') }}</h3>
+        <ul class="space-y-2 text-sm">
+    <li><a href="{{ route('careers.index') }}" class="hover:text-[#f39c12]">{{ __('app.jobs') }}</a></li>
+    <li><a href="{{ route('projects') }}" class="hover:text-[#f39c12]">{{ __('app.projects') }}</a></li>
+    <li><a href="{{ route('reports.index') }}" class="hover:text-[#f39c12]">{{ __('app.reports') }}</a></li>
+    <li><a href="{{ route('contact.form') }}" class="hover:text-[#f39c12]">{{ __('app.contact') }}</a></li>
+    <li><a href="{{ route('news.index') }}" class="hover:text-[#f39c12]">{{ __('app.news') }}</a></li>
+    <li><a href="{{ route('orphan.create') }}" class="hover:text-[#f39c12]">{{ __('app.orphan_request') }}</a></li>
+</ul>
             </div>
 
             <!-- Contact Info -->
             <div class="footer-section">
-                <h3 class="text-lg font-bold text-[#f39c12] mb-3">تواصل معنا</h3>
-                <p class="text-sm text-[#bdc3c7] leading-relaxed">
-                    البريد الإلكتروني: info@example.com<br>
-                    الهاتف: 0799999999<br>
-                    العنوان: عمان - الأردن
-                </p>
+                <h3 class="text-lg font-bold text-[#f39c12] mb-3">{{ __('app.contact_us') }}</h3>
+               <p class="text-sm text-[#bdc3c7] leading-relaxed">
+    {{ __('app.email') }}: info@example.com<br>
+    {{ __('app.phone') }}: 0799999999<br>
+    {{ __('app.address') }}: {{ __('app.location') }}
+</p>
             </div>
         </div>
 
         <!-- Bottom -->
-        <div class="footer-bottom border-t border-[#34495e] pt-4 text-sm text-[#95a5a6]">
-            &copy; {{ date('Y') }} جميع الحقوق محفوظة لجمعية فرسان الريادة.
-        </div>
+       <div class="footer-bottom border-t border-[#34495e] pt-4 text-sm text-[#95a5a6]">
+    &copy; {{ date('Y') }} {{ __('app.copyright') }}
+</div>
     </div>
 </footer>
 

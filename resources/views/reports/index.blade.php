@@ -162,11 +162,16 @@
             </div>
             <div class="relative z-10 max-w-6xl mx-auto px-6">
                 <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 text-center">
-                    📊 التقارير
-                </h1>
-                <p class="text-indigo-100 text-center text-lg max-w-2xl mx-auto">
-                    استكشف مجموعة شاملة من التقارير والدراسات المتنوعة
-                </p>
+ <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 text-center">
+    {{ app()->getLocale() === 'en' ? $firstReport?->title_en : $firstReport?->title }}
+</h1>
+
+
+</h1>
+<p class="text-indigo-100 text-center text-lg max-w-2xl mx-auto">
+    {{ __('reports.subtitle') }}
+</p>
+
             </div>
         </div>
 
@@ -185,14 +190,17 @@
                                     <a href="{{ route('reports.show', $report->id) }}" class="text-xl md:text-2xl font-semibold gradient-text hover:opacity-80 transition-opacity">
                                         {{ $report->title }}
                                     </a>
-                                    <div class="flex items-center mt-2 space-x-reverse space-x-4">
-                                        @if($report->category)
-                                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm bg-indigo-100 text-indigo-700">
-                                            📈 الفئة: {{ $report->category }}
-                                        </span>
-                                        @endif
-                                     
-                                    </div>
+                           <div class="flex items-center mt-2 space-x-reverse space-x-4">
+    @if($report->category)
+        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm bg-indigo-100 text-indigo-700">
+            @php
+                $category = app()->getLocale() === 'en' && $report->category_en ? $report->category_en : $report->category;
+            @endphp
+            {{ __('reports.category') }}: {{ $category }}
+        </span>
+    @endif
+</div>
+
                                 </div>
                                 <div class="mr-4">
                                     <div class="w-16 h-16 icon-gradient rounded-full flex items-center justify-center text-white text-2xl">
@@ -201,16 +209,18 @@
                                 </div>
                             </div>
                             <p class="text-gray-700 line-clamp-3 leading-relaxed text-lg">
-                                {{ $report->description }}
+                                {{ \Illuminate\Support\Str::limit(strip_tags(app()->getLocale() === 'en' ? $report->description_en : $report->description), 150, '...') }}
+
                             </p>
                             <div class="mt-4 flex items-center justify-between">
                                 <div class="flex items-center space-x-reverse space-x-4">
                                    
                                    
                                 </div>
-                                <a href="{{ route('reports.show', $report->id) }}" class="btn-modern px-6 py-2 rounded-full text-white font-medium">
-                                    قراءة المزيد ←
-                                </a>
+                              <a href="{{ route('reports.show', $report->id) }}" class="btn-modern px-6 py-2 rounded-full text-white font-medium">
+    {{ __('reports.read_more') }}
+</a>
+
                             </div>
                         </div>
                     </div>
@@ -228,8 +238,13 @@
                     <div class="w-24 h-24 empty-state-bg rounded-full flex items-center justify-center text-white text-4xl mx-auto mb-6">
                         📝
                     </div>
-                    <h3 class="text-2xl font-semibold text-gray-700 mb-2">لا توجد تقارير متاحة حالياً</h3>
-                    <p class="text-lg" style="color: #7EB6C1;">لا توجد تقارير متاحة حالياً.</p>
+                    <h3 class="text-2xl font-semibold text-gray-700 mb-2">
+    {{ __('reports.no_reports_title') }}
+</h3>
+<p class="text-lg" style="color: #7EB6C1;">
+    {{ __('reports.no_reports_desc') }}
+</p>
+
                 </div>
                 @endif
             </div>

@@ -197,13 +197,26 @@
     }
     </style>
 
+ 
+    <x-slot name="header">
+        <h2 class="text-3xl font-bold text-center text-white mb-6">
+            {{ __('profile.account_management') }}
+        </h2>
+        <p class="text-center text-sm text-white/90">
+            {{ __('profile.account_management_desc') }}
+        </p>
+    </x-slot>
+
+    <!-- styles kept as-is (not repeated here for brevity) -->
+
     <div class="main-container">
         <div class="wrapper">
 
             <!-- Profile Info -->
             <div class="section-box">
-                <h3 class="section-title">تحديث المعلومات الشخصية</h3>
-                <p class="section-description">قم بتعديل اسمك، بريدك الإلكتروني أو أي معلومات أخرى مرتبطة بالحساب.</p>
+            <h3 class="section-title">{{ __('profile.update_profile_title') }}</h3>
+<p class="section-description">{{ __('profile.update_profile_desc') }}</p>
+
                 <div class="max-w-xl">
                     @include('profile.partials.update-profile-information-form')
                 </div>
@@ -211,8 +224,8 @@
 
             <!-- Password -->
             <div class="section-box">
-                <h3 class="section-title">تغيير كلمة المرور</h3>
-                <p class="section-description">ننصحك باختيار كلمة مرور قوية لضمان أمان حسابك.</p>
+                <h3 class="section-title">{{ __('profile.change_password_title') }}</h3>
+                <p class="section-description">{{ __('profile.change_password_desc') }}</p>
                 <div class="max-w-xl">
                     @include('profile.partials.update-password-form')
                 </div>
@@ -220,8 +233,8 @@
 
             <!-- Delete Account -->
             <div class="section-box">
-                <h3 class="section-title text-danger">حذف الحساب</h3>
-                <p class="section-description">يرجى الانتباه: حذف الحساب هو إجراء دائم ولا يمكن التراجع عنه.</p>
+                <h3 class="section-title text-danger">{{ __('profile.delete_account_title') }}</h3>
+                <p class="section-description">{{ __('profile.delete_account_desc') }}</p>
                 <div class="max-w-xl">
                     @include('profile.partials.delete-user-form')
                 </div>
@@ -229,33 +242,39 @@
 
             <!-- Donation History -->
             <div class="section-box donation-section">
-                <h3 class="section-title">سجل التبرعات</h3>
+                <h3 class="section-title">{{ __('profile.donation_history_title') }}</h3>
 
                 @if($donations->isEmpty())
-                    <p class="section-description">لا توجد تبرعات حتى الآن.</p>
+                    <p class="section-description">{{ __('profile.donation_history_empty') }}</p>
                 @else
                     <div class="overflow-x-auto">
                         <table class="donation-table">
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>المشروع</th>
-                                    <th>المبلغ</th>
-                                    <th>طريقة الدفع</th>
-                                    <th>الحالة</th>
-                                    <th>تاريخ التبرع</th>
+                                    <th>{{ __('profile.project') }}</th>
+                                    <th>{{ __('profile.amount') }}</th>
+                                    <th>{{ __('profile.payment_method') }}</th>
+                                    <th>{{ __('profile.status') }}</th>
+                                    <th>{{ __('profile.donation_date') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($donations as $index => $donation)
+                                    @php
+                                        $locale = app()->getLocale();
+                                        $projectName = $locale === 'ar'
+                                            ? ($donation->project?->name_ar ?? $donation->project?->name_en ?? 'غير محدد')
+                                            : ($donation->project?->name_en ?? $donation->project?->name_ar ?? 'Unspecified');
+                                    @endphp
                                     <tr>
                                         <td>{{ $index + 1 }}</td>
-                                        <td>{{ $donation->project?->name ?? 'غير محدد' }}</td>
+                                        <td>{{ $projectName }}</td>
                                         <td>{{ number_format($donation->amount, 2) }} د.أ</td>
                                         <td>{{ $donation->payment_type ?? '-' }}</td>
                                         <td>
                                             <span class="{{ $donation->status == 'success' ? 'status-success' : 'status-pending' }}">
-                                                {{ $donation->status == 'success' ? 'ناجح' : 'قيد المعالجة' }}
+                                                {{ $donation->status == 'success' ? __('profile.status_success') : __('profile.status_pending') }}
                                             </span>
                                         </td>
                                         <td>{{ $donation->created_at->format('Y-m-d H:i') }}</td>
@@ -269,21 +288,21 @@
 
             <!-- Sponsorship History Section -->
             <div class="section-box sponsorship-section">
-                <h3 class="section-title">سجل الكفالات</h3>
+                <h3 class="section-title">{{ __('profile.sponsorship_history_title') }}</h3>
 
                 @if($sponsorships->isEmpty())
-                    <p class="section-description">لا توجد كفالات حتى الآن.</p>
+                    <p class="section-description">{{ __('profile.sponsorship_history_empty') }}</p>
                 @else
                     <div class="overflow-x-auto">
                         <table class="donation-table">
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>اليتيم</th>
-                                    <th>نوع الكفالة</th>
-                                    <th>منذ</th>
-                                    <th>عدد الأيتام</th>
-                                    <th>الحالة</th>
+                                    <th>{{ __('profile.orphan') }}</th>
+                                    <th>{{ __('profile.sponsorship_type') }}</th>
+                                    <th>{{ __('profile.start_date') }}</th>
+                                    <th>{{ __('profile.orphans_count') }}</th>
+                                    <th>{{ __('profile.status') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -296,7 +315,7 @@
                                         <td>{{ $sponsorship->number_of_orphans }}</td>
                                         <td>
                                             <span class="{{ $sponsorship->status == 'active' ? 'status-success' : 'status-pending' }}">
-                                                {{ $sponsorship->status == 'active' ? 'نشطة' : 'منتهية' }}
+                                                {{ $sponsorship->status == 'active' ? __('profile.status_active') : __('profile.status_inactive') }}
                                             </span>
                                         </td>
                                     </tr>

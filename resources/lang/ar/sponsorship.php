@@ -1,0 +1,27 @@
+<?php
+
+return [
+    'sponsor_info_title'      => 'معلومات الكافل',
+    'sponsor_info_desc'       => 'يرجى تعبئة كافة البيانات بدقة',
+    'personal_data'           => 'بيانات شخصية',
+    'sponsor_name'            => 'اسم الكافل',
+    'country'                 => 'الدولة',
+    'phone'                   => 'رقم الهاتف',
+    'email'                   => 'البريد الإلكتروني',
+    'start_date'              => 'تاريخ البدء',
+    'sponsorship_details'     => 'تفاصيل الكفالة',
+    'orphan_count'            => 'عدد الأيتام',
+    'orphan_count_placeholder'=> 'عدد الأيتام',
+    'orphan_1'                => '1',
+    'orphan_2'                => '2',
+    'orphan_3_plus'           => 'أكثر من 2',
+    'sponsoring_for'          => 'المساهمة عن',
+    'sponsorship_type'        => 'نوع الكفالة',
+    'sponsorship_type_monthly'=> 'شهرية',
+    'sponsorship_type_yearly' => 'سنوية',
+    'sponsorship_type_once'   => 'مرة واحدة',
+    'select_orphans'          => 'اختر الأيتام للكفالة',
+    'view_profile'            => 'عرض الملف',
+    'no_orphans'              => 'لا يوجد أيتام متاحين حالياً.',
+    'submit'                  => 'إرسال الطلب',
+];

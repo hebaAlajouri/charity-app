@@ -1,26 +1,26 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\OrphanApplication;
 use App\Models\Orphan;
+use Illuminate\Support\Facades\App;
 
 class OrphanApplicationController extends Controller
 {
     public function create()
     {
+        // return the view that contains the orphan application form
         return view('orphan.create');
     }
-
     public function store(Request $request)
     {
         try {
-            // Debug: Log the incoming request data
             \Log::info('Request data:', $request->all());
 
-            // تحقق من صحة البيانات
             $validatedData = $request->validate([
-                // بيانات الكفيل
+                // guardian
                 'guardian_name' => 'required|string|max:255',
                 'guardian_phone' => 'required|string|max:20',
                 'guardian_email' => 'nullable|email|max:255',
@@ -29,8 +29,8 @@ class OrphanApplicationController extends Controller
                 'guardian_address' => 'required|string',
                 'guardian_city' => 'required|string|max:255',
                 'guardian_country' => 'required|string|max:255',
-                
-                // بيانات اليتيم
+
+                // orphan
                 'orphan_name' => 'required|string|max:255',
                 'orphan_birth_date' => 'required|date',
                 'orphan_gender' => 'required|in:ذكر,أنثى',
@@ -38,63 +38,67 @@ class OrphanApplicationController extends Controller
                 'orphan_nationality' => 'required|string|max:255',
                 'orphan_address' => 'required|string',
                 'orphan_city' => 'required|string|max:255',
-                
-                // بيانات الأب
+
+                // father
                 'father_name' => 'required|string|max:255',
                 'father_death_date' => 'required|date',
                 'father_death_cause' => 'required|string|max:255',
                 'father_id_number' => 'required|string|unique:orphan_applications,father_id_number',
                 'father_job_before_death' => 'nullable|string|max:255',
-                
-                // المعلومات المالية
+
+                // financial
                 'monthly_income' => 'required|numeric',
                 'income_source' => 'nullable|string|max:255',
                 'family_members_count' => 'required|integer',
                 'financial_situation_description' => 'required|string',
-                
-                // معلومات السكن
+
+                // housing
                 'housing_type' => 'required|in:ملك,إيجار,مع الأقارب,أخرى',
                 'monthly_rent' => 'nullable|numeric',
                 'housing_description' => 'required|string',
-                
-                // معلومات صحية
+
+                // health
                 'has_health_issues' => 'sometimes|boolean',
                 'health_issues_description' => 'nullable|string',
                 'needs_medical_care' => 'sometimes|boolean',
                 'medical_care_description' => 'nullable|string',
-                
-                // التعليم
+
+                // education
                 'education_level' => 'required|string|max:255',
                 'school_name' => 'nullable|string|max:255',
                 'needs_educational_support' => 'sometimes|boolean',
                 'educational_needs_description' => 'nullable|string',
-                
-                // إضافات
+
+                // other
                 'special_circumstances' => 'nullable|string',
                 'additional_notes' => 'nullable|string',
                 'support_needed' => 'required|string',
             ]);
 
-            // Debug: Log validated data
-            \Log::info('Validated data:', $validatedData);
-
-            // Handle checkbox values - convert to boolean
+            // Convert checkboxes
             $validatedData['has_health_issues'] = $request->has('has_health_issues') ? 1 : 0;
             $validatedData['needs_medical_care'] = $request->has('needs_medical_care') ? 1 : 0;
             $validatedData['needs_educational_support'] = $request->has('needs_educational_support') ? 1 : 0;
 
-            // حفظ بيانات الطلب في جدول orphan_applications
+            // Multilingual fields
+            if (App::getLocale() === 'en') {
+                $validatedData['orphan_city_en'] = $validatedData['orphan_city'];
+                $validatedData['housing_type_en'] = $validatedData['housing_type'];
+                $validatedData['education_level_en'] = $validatedData['education_level'];
+            } else {
+                $validatedData['orphan_city_en'] = null;
+                $validatedData['housing_type_en'] = null;
+                $validatedData['education_level_en'] = null;
+            }
+
             $application = OrphanApplication::create($validatedData);
-            
-            // Debug: Log application creation
             \Log::info('Application created:', $application->toArray());
 
-            // حساب العمر من تاريخ ميلاد اليتيم
+            // Age calculation
             $birthDate = new \DateTime($validatedData['orphan_birth_date']);
             $today = new \DateTime();
             $age = $birthDate->diff($today)->y;
 
-            // حفظ بيانات اليتيم في جدول orphans
             $orphan = Orphan::create([
                 'name' => $validatedData['orphan_name'],
                 'guardian_phone' => $validatedData['guardian_phone'],
@@ -103,18 +107,15 @@ class OrphanApplicationController extends Controller
                 'status' => 'available',
             ]);
 
-            // Debug: Log orphan creation
             \Log::info('Orphan created:', $orphan->toArray());
 
             return redirect()->back()->with('success', 'تم إرسال طلب الكفالة بنجاح.');
 
         } catch (\Illuminate\Validation\ValidationException $e) {
-            // Debug: Log validation errors
             \Log::error('Validation failed:', $e->errors());
             return redirect()->back()->withErrors($e->errors())->withInput();
-            
+
         } catch (\Exception $e) {
-            // Debug: Log any other errors
             \Log::error('Error saving application:', [
                 'message' => $e->getMessage(),
                 'line' => $e->getLine(),

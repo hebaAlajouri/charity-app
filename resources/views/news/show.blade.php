@@ -3,14 +3,14 @@
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap');
 
         :root {
-            --primary-navy: #2C3E50;           /* Soft Deep Blue */
-            --primary-gold: #C9B458;           /* Soft Muted Gold */
-            --accent-navy: #7EB6C1;            /* Baby Blue - Calm */
-            --accent-gold: #E3D58A;            /* Soft Warm Gold */
-            --light-gold: #F5F9FA;             /* Very Light Blue-Gray */
-            --dark-navy: #1F2F3A;              /* Dark Navy */
-            --muted-blue: #A6C1D9;             /* Light Dusty Baby Blue */
-            --soft-beige: #D4E6E8;             /* Pale Baby Blue Tint */
+            --primary-navy: #2C3E50;
+            --primary-gold: #C9B458;
+            --accent-navy: #7EB6C1;
+            --accent-gold: #E3D58A;
+            --light-gold: #F5F9FA;
+            --dark-navy: #1F2F3A;
+            --muted-blue: #A6C1D9;
+            --soft-beige: #D4E6E8;
             --gold-gradient: linear-gradient(45deg, #C9B458, #E3D58A);
         }
 
@@ -19,6 +19,8 @@
             background: var(--light-gold);
             line-height: 1.6;
             color: var(--primary-navy);
+            direction: {{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }};
+            text-align: {{ app()->getLocale() === 'ar' ? 'right' : 'left' }};
         }
 
         .news-hero {
@@ -40,8 +42,6 @@
         .news-container {
             max-width: 1000px;
             margin: 0 auto;
-            position: relative;
-            z-index: 2;
         }
 
         .news-title {
@@ -51,7 +51,6 @@
             text-align: center;
             margin-bottom: 2rem;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            line-height: 1.2;
         }
 
         .news-content-wrapper {
@@ -59,9 +58,6 @@
             border-radius: 20px;
             box-shadow: 0 25px 50px rgba(44, 62, 80, 0.15);
             overflow: hidden;
-            position: relative;
-            margin-top: -2rem;
-            z-index: 3;
         }
 
         .news-image-container {
@@ -94,7 +90,6 @@
 
         .news-content {
             padding: 3rem;
-            color: var(--primary-navy);
             font-size: 1.1rem;
             line-height: 1.8;
         }
@@ -102,7 +97,7 @@
         .news-content::first-letter {
             font-size: 4rem;
             font-weight: 700;
-            float: left;
+            float: {{ app()->getLocale() === 'ar' ? 'right' : 'left' }};
             margin: 0.1rem 0.5rem 0 0;
             color: var(--primary-gold);
             line-height: 1;
@@ -118,8 +113,8 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 2rem;
-            color: var(--muted-blue);
             font-weight: 500;
+            color: var(--muted-blue);
         }
 
         .meta-item {
@@ -136,16 +131,15 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--primary-navy);
             font-size: 1.2rem;
+            color: var(--primary-navy);
         }
 
         .back-button {
             position: fixed;
             top: 2rem;
-            left: 2rem;
+            {{ app()->getLocale() === 'ar' ? 'right' : 'left' }}: 2rem;
             background: var(--gold-gradient);
-            color: var(--primary-navy);
             padding: 1rem;
             border-radius: 50%;
             text-decoration: none;
@@ -155,9 +149,9 @@
             width: 60px;
             height: 60px;
             font-size: 1.5rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(201, 180, 88, 0.3);
             z-index: 1000;
+            box-shadow: 0 10px 30px rgba(201, 180, 88, 0.3);
+            transition: all 0.3s ease;
         }
 
         .back-button:hover {
@@ -180,40 +174,6 @@
             width: 0%;
             transition: width 0.1s ease;
         }
-
-        @media (max-width: 768px) {
-            .news-title {
-                font-size: 2rem;
-            }
-            .news-content {
-                padding: 2rem;
-                font-size: 1rem;
-            }
-            .news-hero {
-                padding: 2rem 1rem;
-            }
-            .back-button {
-                top: 1rem;
-                left: 1rem;
-                width: 50px;
-                height: 50px;
-                font-size: 1.2rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .news-title {
-                font-size: 1.5rem;
-            }
-            .news-content {
-                padding: 1.5rem;
-            }
-            .news-meta {
-                padding: 1.5rem;
-                flex-direction: column;
-                gap: 1rem;
-            }
-        }
     </style>
 
     <!-- Reading Progress Bar -->
@@ -222,19 +182,21 @@
     </div>
 
     <!-- Back Button -->
-    <a href="#" class="back-button" onclick="history.back()" aria-label="عودة">
-        <i class="fas fa-arrow-left" aria-hidden="true"></i>
+    <a href="#" class="back-button" onclick="history.back()" aria-label="{{ __('news.back') }}">
+        <i class="fas fa-arrow-{{ app()->getLocale() === 'ar' ? 'right' : 'left' }}" aria-hidden="true"></i>
     </a>
 
     <!-- Hero Section -->
-    <div class="news-hero" role="banner">
+    <div class="news-hero">
         <div class="news-container">
-            <h1 class="news-title">{{ $news->title }}</h1>
+            <h1 class="news-title">
+                {{ app()->getLocale() === 'ar' ? $news->title : $news->title_en }}
+            </h1>
         </div>
     </div>
 
     <!-- Main Content -->
-    <main class="news-container" role="main">
+    <main class="news-container">
         <article class="news-content-wrapper">
             @if($news->image)
                 <div class="news-image-container">
@@ -244,10 +206,10 @@
             @endif
 
             <section class="news-content">
-                {!! nl2br(e($news->content)) !!}
+                {!! nl2br(e(app()->getLocale() === 'ar' ? $news->content : $news->content_en)) !!}
             </section>
 
-            <footer class="news-meta" aria-label="تفاصيل المقال">
+            <footer class="news-meta" aria-label="{{ __('news.details') }}">
                 <div class="meta-item">
                     <div class="meta-icon">
                         <i class="fas fa-calendar" aria-hidden="true"></i>
@@ -268,19 +230,14 @@
         </article>
     </main>
 
-    <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <script>
-        // Reading progress bar
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', function () {
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             const scrolled = (winScroll / height) * 100;
             document.getElementById('progressBar').style.width = scrolled + '%';
         });
-
-        // Smooth scroll behavior
-        document.documentElement.style.scrollBehavior = 'smooth';
     </script>
 </x-app-layout>
