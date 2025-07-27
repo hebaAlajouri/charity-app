@@ -1,0 +1,27 @@
+<?php
+
+return [
+    'title' => 'Orphans',
+    'add_orphan' => 'Add New Orphan',
+    'name' => 'Name',
+    'age' => 'Age',
+    'phone' => 'Phone',
+    'address' => 'Address',
+    'status' => 'Status',
+    'actions' => 'Actions',
+    'edit' => 'Edit',
+    'delete' => 'Delete',
+    'confirm_delete' => 'Are you sure?',
+    'success' => 'Action completed successfully',
+     'edit_title' => 'Edit Orphan Information',
+    'name' => 'Name',
+    'guardian_phone' => 'Guardian Phone',
+    'address' => 'Address',
+    'age' => 'Age',
+    'status' => 'Status',
+    'available' => 'Available',
+    'sponsored' => 'Sponsored',
+    'update_button' => 'Update',
+    'error_heading' => 'The following errors occurred:',
+    'save' => 'save',
+];

@@ -1,22 +1,29 @@
 @extends('admin.layout')
 
 @section('content')
+@php
+    $isRtl = app()->getLocale() === 'ar';
+@endphp
 <div class="container mx-auto px-4 sm:px-8">
     <div class="py-8">
-        <h2 class="text-2xl font-semibold leading-tight text-gray-800 mb-4">طلبات كفالة الأيتام</h2>
-        <a href="{{ route('admin.orphan_applications.create') }}" class="btn-login mb-4 inline-block">إضافة طلب جديد</a>
+        <h2 class="text-2xl font-semibold leading-tight text-gray-800 mb-4">
+            {{ __('adminorphanapplication.title') }}
+        </h2>
 
-        <!-- ✅ overflow for responsiveness -->
+        <a href="{{ route('admin.orphan_applications.create') }}" class="btn-login mb-4 inline-block">
+            {{ __('adminorphanapplication.add_new') }}
+        </a>
+
         <div class="overflow-x-auto w-full">
             <table class="min-w-[900px] w-full text-sm text-right bg-white rounded shadow">
                 <thead class="bg-gray-100 text-gray-700">
                     <tr>
-                        <th class="py-2 px-4 border">#</th>
-                        <th class="py-2 px-4 border">اسم اليتيم</th>
-                        <th class="py-2 px-4 border">اسم الوصي</th>
-                        <th class="py-2 px-4 border">الحالة</th>
-                        <th class="py-2 px-4 border">تاريخ التقديم</th>
-                        <th class="py-2 px-4 border">الإجراءات</th>
+                        <th class="py-2 px-4 border">{{ __('adminorphanapplication.number') }}</th>
+                        <th class="py-2 px-4 border">{{ __('adminorphanapplication.orphan_name') }}</th>
+                        <th class="py-2 px-4 border">{{ __('adminorphanapplication.guardian_name') }}</th>
+                        <th class="py-2 px-4 border">{{ __('adminorphanapplication.status') }}</th>
+                        <th class="py-2 px-4 border">{{ __('adminorphanapplication.created_at') }}</th>
+                        <th class="py-2 px-4 border">{{ __('adminorphanapplication.actions') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,35 +35,42 @@
                             <td class="py-2 px-4 border">
                                 @switch($application->status)
                                     @case('approved')
-                                        <span class="text-green-600">مقبول</span>
+                                        <span class="text-green-600">{{ __('adminorphanapplication.approved') }}</span>
                                         @break
                                     @case('rejected')
-                                        <span class="text-red-600">مرفوض</span>
+                                        <span class="text-red-600">{{ __('adminorphanapplication.rejected') }}</span>
                                         @break
                                     @case('under_review')
-                                        <span class="text-yellow-600">قيد المراجعة</span>
+                                        <span class="text-yellow-600">{{ __('adminorphanapplication.under_review') }}</span>
                                         @break
                                     @default
-                                        <span class="text-gray-500">بانتظار</span>
+                                        <span class="text-gray-500">{{ __('adminorphanapplication.pending') }}</span>
                                 @endswitch
                             </td>
                             <td class="py-2 px-4 border">{{ $application->created_at->format('Y-m-d') }}</td>
                             <td class="py-2 px-4 border">
-                                <!-- ✅ wrap buttons properly -->
                                 <div class="flex flex-wrap justify-center gap-2">
-                                    <a href="{{ route('admin.orphan_applications.show', $application->id) }}" class="btn-action btn-show">عرض</a>
-                                    <a href="{{ route('admin.orphan_applications.edit', $application->id) }}" class="btn-action btn-edit">تعديل</a>
-                                    <form action="{{ route('admin.orphan_applications.destroy', $application->id) }}" method="POST" onsubmit="return confirm('هل أنت متأكد من الحذف؟');">
+                                    <a href="{{ route('admin.orphan_applications.show', $application->id) }}" class="btn-action btn-show">
+                                        {{ __('adminorphanapplication.show') }}
+                                    </a>
+                                    <a href="{{ route('admin.orphan_applications.edit', $application->id) }}" class="btn-action btn-edit">
+                                        {{ __('adminorphanapplication.edit') }}
+                                    </a>
+                                    <form action="{{ route('admin.orphan_applications.destroy', $application->id) }}" method="POST" onsubmit="return confirm('{{ __('adminorphanapplication.confirm_delete') }}');">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn-action btn-delete">حذف</button>
+                                        <button type="submit" class="btn-action btn-delete">
+                                            {{ __('adminorphanapplication.delete') }}
+                                        </button>
                                     </form>
                                 </div>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="py-4 px-4 text-center text-gray-500">لا توجد طلبات حالياً.</td>
+                            <td colspan="6" class="py-4 px-4 text-center text-gray-500">
+                                {{ __('adminorphanapplication.no_requests') }}
+                            </td>
                         </tr>
                     @endforelse
                 </tbody>

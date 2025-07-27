@@ -17,4 +17,21 @@ class Report extends Model
     protected $casts = [
         'published_at' => 'datetime',
     ];
+       public function getLocalizedTitleAttribute()
+    {
+        $locale = app()->getLocale();
+        if ($locale === 'en' && !empty($this->title_en)) {
+            return $this->title_en;
+        }
+        return $this->title;
+    }
+
+    public function getLocalizedCategoryAttribute()
+    {
+        $locale = app()->getLocale();
+        if ($locale === 'en' && !empty($this->category_en)) {
+            return $this->category_en;
+        }
+        return $this->category;
+    }
 }

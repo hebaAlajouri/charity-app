@@ -578,6 +578,70 @@ img.show-img {
             text-align: left;
             font-family: 'Roboto', sans-serif;
         }
+        .sidebar {
+    right: 0;
+}
+body.rtl .sidebar {
+    right: 0;
+    left: auto;
+}
+
+body.ltr .sidebar {
+    left: 0;
+    right: auto;
+}
+.main-content {
+    margin-right: 250px;
+}
+body.rtl .main-content {
+    margin-right: 250px;
+    margin-left: 0;
+}
+
+body.ltr .main-content {
+    margin-left: 250px;
+    margin-right: 0;
+}
+.lang-switcher {
+    padding-top: 10px;
+    border-top: 1px solid #e5e5e5;
+}
+
+.lang-links {
+    display: flex;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.lang-links.ar {
+    justify-content: flex-start;
+    direction: rtl;
+}
+
+.lang-links.en {
+    justify-content: flex-start;
+    direction: ltr;
+}
+
+.lang-links a {
+    color: #666;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.lang-links a:hover {
+    color: #e74c3c;
+}
+
+.lang-links a.active {
+    font-weight: bold;
+    color: #e74c3c;
+}
+
+.lang-links span {
+    color: #aaa;
+}
+
 /* === RESPONSIVE DESIGN === */
 
 /* Mobile First Approach - Extra Small Devices (Portrait phones, less than 576px) */
@@ -879,6 +943,23 @@ img.show-img {
     .content-wrapper {
         max-width: 1200px;
     }
+    @media (max-width: 991.98px) {
+    .main-content {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    body.rtl .sidebar {
+        right: 0;
+        left: auto;
+    }
+
+    body.ltr .sidebar {
+        left: 0;
+        right: auto;
+    }
+}
+
 }
 </style>
 </head>
@@ -886,57 +967,59 @@ img.show-img {
 <div class="dashboard-container">
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <h2>نظام الإدارة</h2>
+            <h2>{{ __('admindashboardlayout.admin_system') }}</h2>
         </div>
         <div class="sidebar-nav">
-            <div class="nav-item"><a href="/admin/dashboard" class="nav-link">الرئيسية</a></div>
-            <div class="nav-item"><a href="/admin/users" class="nav-link">المستخدمين</a></div>
-            <div class="nav-item"><a href="/admin/orphans" class="nav-link">الأيتام</a></div>
-            <div class="nav-item"><a href="/admin/projects" class="nav-link">المشاريع</a></div>
-            <div class="nav-item"><a href="/admin/jobs" class="nav-link">وظائف</a></div>
-            <div class="nav-item"><a href="/admin/sponsorships" class="nav-link">التبرعات</a></div>
-            <div class="nav-item"><a href="/admin/reports" class="nav-link">التقارير</a></div>
-            <div class="nav-item"><a href="/admin/news" class="nav-link">الأخبار</a></div>
-         
-            <div class="nav-item"><a href="/admin/orphan_applications" class="nav-link">طلبات الأيتام</a></div>
+            <div class="nav-item"><a href="/admin/dashboard" class="nav-link">{{ __('admindashboardlayout.dashboard') }}</a></div>
+            <div class="nav-item"><a href="/admin/users" class="nav-link">{{ __('admindashboardlayout.users') }}</a></div>
+            <div class="nav-item"><a href="/admin/orphans" class="nav-link">{{ __('admindashboardlayout.orphans') }}</a></div>
+            <div class="nav-item"><a href="/admin/projects" class="nav-link">{{ __('admindashboardlayout.projects') }}</a></div>
+            <div class="nav-item"><a href="/admin/jobs" class="nav-link">{{ __('admindashboardlayout.jobs') }}</a></div>
+            <div class="nav-item"><a href="/admin/sponsorships" class="nav-link">{{ __('admindashboardlayout.sponsorships') }}</a></div>
+            <div class="nav-item"><a href="/admin/reports" class="nav-link">{{ __('admindashboardlayout.reports') }}</a></div>
+            <div class="nav-item"><a href="/admin/news" class="nav-link">{{ __('admindashboardlayout.news') }}</a></div>
+            <div class="nav-item"><a href="/admin/orphan_applications" class="nav-link">{{ __('admindashboardlayout.orphan_applications') }}</a></div>
         </div>
     </nav>
 
     <div class="main-content">
-       <header class="main-header">
-    <div class="header-left">
-        <button class="menu-toggle" id="menuToggle">☰</button>
-        <h1 class="page-title">@yield('title', 'لوحة التحكم')</h1>
-    </div>
-    <div class="header-right">
-<a href="{{ url('/admin/messages') }}" class="notification-icon" title="رسائل غير مقروءة">
-    <span class="icon">🔔</span>
-    @if ($unreadCount > 0)
-        <span class="counter">{{ $unreadCount }}</span>
-    @endif
-</a>
+        <header class="main-header">
+            <div class="header-left">
+                <button class="menu-toggle" id="menuToggle">☰</button>
+                <h1 class="page-title">@yield('title', __('admindashboardlayout.dashboard'))</h1>
+            </div>
+            <div class="header-right">
+                <a href="{{ url('/admin/messages') }}" class="notification-icon" title="{{ __('admindashboardlayout.unread_messages') }}">
+                    <span class="icon">🔔</span>
+                    @if ($unreadCount > 0)
+                        <span class="counter">{{ $unreadCount }}</span>
+                    @endif
+                </a>
 
-
-        <div class="user-info">
-            <span>مرحباً، مدير</span>
-        </div>
-        
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <button type="submit" class="logout-btn">تسجيل الخروج</button>
-        </form>
-           <!-- Language Switcher for Mobile -->
-            <li class="pt-2 border-t border-gray-200">
-                <div class="flex gap-2 text-sm {{ app()->getLocale() == 'ar' ? 'justify-start' : 'justify-start' }}">
-                    <a href="{{ route('lang.switch', 'ar') }}" class="{{ app()->getLocale() == 'ar' ? 'font-bold text-[#e74c3c]' : 'text-gray-600 hover:text-[#e74c3c]' }} transition-colors">{{ __('nav.arabic') }}</a>
-                    <span class="text-gray-400">|</span>
-                    <a href="{{ route('lang.switch', 'en') }}" class="{{ app()->getLocale() == 'en' ? 'font-bold text-[#e74c3c]' : 'text-gray-600 hover:text-[#e74c3c]' }} transition-colors">{{ __('nav.english') }}</a>
+                <div class="user-info">
+                    <span>{{ __('admindashboardlayout.welcome_admin') }}</span>
                 </div>
-            </li>
 
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="logout-btn">{{ __('admindashboardlayout.logout') }}</button>
+                </form>
+
+                <!-- Language Switcher -->
+               
+    <div class="lang-links {{ app()->getLocale() == 'ar' ? 'ar' : 'en' }}">
+        <a href="{{ route('lang.switch', 'ar') }}" class="{{ app()->getLocale() == 'ar' ? 'active' : '' }}">
+            {{ __('nav.arabic') }}
+        </a>
+        <span>|</span>
+        <a href="{{ route('lang.switch', 'en') }}" class="{{ app()->getLocale() == 'en' ? 'active' : '' }}">
+            {{ __('nav.english') }}
+        </a>
     </div>
-</header>
 
+
+            </div>
+        </header>
 
         <main class="content-area">
             <div class="content-wrapper">
@@ -944,6 +1027,7 @@ img.show-img {
             </div>
         </main>
     </div>
+</div>
 </div>
 
 <div class="overlay" id="overlay"></div>

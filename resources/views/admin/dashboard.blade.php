@@ -1,7 +1,7 @@
 @extends('admin.layout')
 
 @section('content')
-<h1 class="text-3xl font-bold text-[#e74c3c] mb-8 text-center">لوحة التحكم</h1>
+<h1 class="text-3xl font-bold text-[#e74c3c] mb-8 text-center">{{ __('admindashboard.dashboard_title') }}</h1>
 
 <div class="grid grid-cols-1 xl:grid-cols-2 gap-8 mb-8">
     <!-- Orphans Chart Card -->
@@ -33,7 +33,6 @@
     Chart.defaults.font.size = 13;
     Chart.defaults.color = '#4a5568';
 
-    // Modern color palettes
     const colors = {
         primary: ['#667eea', '#764ba2', '#f093fb', '#f5576c', '#4facfe', '#00f2fe'],
         gradient: {
@@ -45,7 +44,6 @@
         }
     };
 
-    // Helper function to create gradient
     function createGradient(ctx, colors, direction = 'vertical') {
         const gradient = direction === 'vertical' 
             ? ctx.createLinearGradient(0, 0, 0, 400)
@@ -56,7 +54,7 @@
         return gradient;
     }
 
-    // Enhanced Orphans Chart (Doughnut)
+    // Orphans Chart
     const orphansCtx = document.getElementById('orphansChart').getContext('2d');
     const orphansGradient1 = createGradient(orphansCtx, colors.gradient.blue);
     const orphansGradient2 = createGradient(orphansCtx, colors.gradient.green);
@@ -81,16 +79,10 @@
             plugins: {
                 title: {
                     display: true,
-                    text: 'حالة الأيتام',
-                    font: {
-                        size: 18,
-                        weight: 'bold'
-                    },
+                    text: '{{ __('admindashboard.orphans_status') }}',
+                    font: { size: 18, weight: 'bold' },
                     color: '#2d3748',
-                    padding: {
-                        top: 10,
-                        bottom: 30
-                    }
+                    padding: { top: 10, bottom: 30 }
                 },
                 legend: {
                     position: 'bottom',
@@ -98,9 +90,7 @@
                         usePointStyle: true,
                         pointStyle: 'circle',
                         padding: 20,
-                        font: {
-                            size: 14
-                        }
+                        font: { size: 14 }
                     }
                 },
                 tooltip: {
@@ -129,7 +119,7 @@
         }
     });
 
-    // Enhanced Donations Chart (Bar)
+    // Donations Chart
     const donationsCtx = document.getElementById('donationsChart').getContext('2d');
     const donationsGradient1 = createGradient(donationsCtx, colors.gradient.orange);
     const donationsGradient2 = createGradient(donationsCtx, colors.gradient.purple);
@@ -139,7 +129,7 @@
         data: {
             labels: {!! json_encode($donationsByStatus->keys()) !!},
             datasets: [{
-                label: 'عدد التبرعات',
+                label: '{{ __('admindashboard.donations_count') }}',
                 data: {!! json_encode($donationsByStatus->values()) !!},
                 backgroundColor: [donationsGradient1, donationsGradient2],
                 borderRadius: 8,
@@ -155,20 +145,12 @@
             plugins: {
                 title: {
                     display: true,
-                    text: 'حالة التبرعات',
-                    font: {
-                        size: 18,
-                        weight: 'bold'
-                    },
+                    text: '{{ __('admindashboard.donations_status') }}',
+                    font: { size: 18, weight: 'bold' },
                     color: '#2d3748',
-                    padding: {
-                        top: 10,
-                        bottom: 30
-                    }
+                    padding: { top: 10, bottom: 30 }
                 },
-                legend: {
-                    display: false
-                },
+                legend: { display: false },
                 tooltip: {
                     backgroundColor: 'rgba(0, 0, 0, 0.8)',
                     titleColor: '#ffffff',
@@ -182,37 +164,19 @@
             scales: {
                 y: {
                     beginAtZero: true,
-                    grid: {
-                        color: 'rgba(0, 0, 0, 0.05)',
-                        lineWidth: 1
-                    },
-                    ticks: {
-                        font: {
-                            size: 12
-                        },
-                        color: '#718096'
-                    }
+                    grid: { color: 'rgba(0, 0, 0, 0.05)', lineWidth: 1 },
+                    ticks: { font: { size: 12 }, color: '#718096' }
                 },
                 x: {
-                    grid: {
-                        display: false
-                    },
-                    ticks: {
-                        font: {
-                            size: 12
-                        },
-                        color: '#718096'
-                    }
+                    grid: { display: false },
+                    ticks: { font: { size: 12 }, color: '#718096' }
                 }
             },
-            animation: {
-                duration: 1500,
-                easing: 'easeInOutQuart'
-            }
+            animation: { duration: 1500, easing: 'easeInOutQuart' }
         }
     });
 
-    // Enhanced Donation Amounts Chart (Bar)
+    // Donation Amounts Chart
     const amountCtx = document.getElementById('donationAmountsChart').getContext('2d');
     const amountGradient = createGradient(amountCtx, ['#8e44ad', '#3498db']);
     
@@ -221,7 +185,7 @@
         data: {
             labels: {!! json_encode($donationAmounts->keys()) !!},
             datasets: [{
-                label: 'المبلغ الإجمالي',
+                label: '{{ __('admindashboard.total_amount') }}',
                 data: {!! json_encode($donationAmounts->values()) !!},
                 backgroundColor: amountGradient,
                 borderRadius: 8,
@@ -237,20 +201,12 @@
             plugins: {
                 title: {
                     display: true,
-                    text: 'التبرعات حسب المشروع',
-                    font: {
-                        size: 18,
-                        weight: 'bold'
-                    },
+                    text: '{{ __('admindashboard.donation_by_project') }}',
+                    font: { size: 18, weight: 'bold' },
                     color: '#2d3748',
-                    padding: {
-                        top: 10,
-                        bottom: 30
-                    }
+                    padding: { top: 10, bottom: 30 }
                 },
-                legend: {
-                    display: false
-                },
+                legend: { display: false },
                 tooltip: {
                     backgroundColor: 'rgba(0, 0, 0, 0.8)',
                     titleColor: '#ffffff',
@@ -261,7 +217,7 @@
                     caretPadding: 10,
                     callbacks: {
                         label: function(context) {
-                            return `${context.dataset.label}: ${context.parsed.y.toLocaleString()} ريال`;
+                            return `${context.dataset.label}: ${context.parsed.y.toLocaleString()} {{ __('admindashboard.currency') }}`;
                         }
                     }
                 }
@@ -269,38 +225,26 @@
             scales: {
                 y: {
                     beginAtZero: true,
-                    grid: {
-                        color: 'rgba(0, 0, 0, 0.05)',
-                        lineWidth: 1
-                    },
+                    grid: { color: 'rgba(0, 0, 0, 0.05)', lineWidth: 1 },
                     ticks: {
-                        font: {
-                            size: 12
-                        },
+                        font: { size: 12 },
                         color: '#718096',
                         callback: function(value) {
-                            return value.toLocaleString() + ' دينار';
+                            return value.toLocaleString() + ' {{ __('admindashboard.currency_dinar') }}';
                         }
                     }
                 },
                 x: {
-                    grid: {
-                        display: false
-                    },
+                    grid: { display: false },
                     ticks: {
-                        font: {
-                            size: 12
-                        },
+                        font: { size: 12 },
                         color: '#718096',
                         maxRotation: 45,
                         minRotation: 0
                     }
                 }
             },
-            animation: {
-                duration: 1500,
-                easing: 'easeInOutQuart'
-            }
+            animation: { duration: 1500, easing: 'easeInOutQuart' }
         }
     });
 </script>

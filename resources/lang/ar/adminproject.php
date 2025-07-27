@@ -1,0 +1,31 @@
+<?php
+
+return [
+    'project_list' => 'قائمة المشاريع',
+    'add_project' => 'إضافة مشروع جديد',
+    'success' => 'تمت العملية بنجاح',
+    'table' => [
+        'index' => '#',
+        'name' => 'اسم المشروع',
+        'code' => 'الرمز',
+        'goal_amount' => 'المبلغ المستهدف',
+        'donation_percentage' => 'نسبة التبرع',
+        'icon' => 'الأيقونة',
+        'image' => 'الصورة',
+        'actions' => 'الخيارات',
+        'no_image' => 'لا يوجد',
+        'delete_confirm' => 'هل أنت متأكد من الحذف؟',
+    ],
+    'edit' => 'تعديل',
+    'delete' => 'حذف',
+     'add_project' => 'إضافة مشروع جديد',
+    'name' => 'اسم المشروع',
+    'code' => 'رمز المشروع',
+    'goal_amount' => 'المبلغ المستهدف',
+    'raised_amount' => 'المبلغ المحقق',
+    'icon' => 'أيقونة FontAwesome (اختياري)',
+    'image' => 'صورة المشروع',
+    'description' => 'وصف المشروع',
+    'save' => 'حفظ',
+    'validation_errors' => 'حدثت بعض الأخطاء:',
+];

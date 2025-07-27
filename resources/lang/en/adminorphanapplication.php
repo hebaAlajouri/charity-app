@@ -1,0 +1,138 @@
+<?php
+
+return [
+    'title'            => 'Orphan Sponsorship Applications',
+    'add_new'          => 'Add New Application',
+    'number'           => '#',
+    'orphan_name'      => 'Orphan Name',
+    'guardian_name'    => 'Guardian Name',
+    'status'           => 'Status',
+    'created_at'       => 'Submitted At',
+    'actions'          => 'Actions',
+    'approved'         => 'Approved',
+    'rejected'         => 'Rejected',
+    'under_review'     => 'Under Review',
+    'pending'          => 'Pending',
+    'show'             => 'View',
+    'edit'             => 'Edit',
+    'delete'           => 'Delete',
+    'confirm_delete'   => 'Are you sure you want to delete?',
+    'no_requests'      => 'No applications found.',
+     'title' => 'Edit Orphan Sponsorship Request',
+    'status_label' => 'Status',
+    'status_pending' => 'Pending',
+    'status_under_review' => 'Under Review',
+    'status_approved' => 'Approved',
+    'status_rejected' => 'Rejected',
+    'admin_notes' => 'Admin Notes',
+    'save_changes' => 'Save Changes',
+    'create_orphan_application' => 'Create the orphan Application',
+    'guardian_name' => 'guardian name',
+'orphan_name' => 'orphan name',
+     // Guardian Information
+    'guardian_info' => 'Guardian Information',
+    'guardian_id_number' => 'Guardian ID Number',
+    'guardian_phone' => 'Guardian Phone',
+    'guardian_email' => 'Guardian Email',
+    'guardian_relationship' => 'Relationship',
+    'guardian_address' => 'Guardian Address',
+    'guardian_city' => 'Guardian City',
+    'guardian_country' => 'Guardian Country',
+    
+    // Orphan Information
+    'orphan_info' => 'Orphan Information',
+    'orphan_birth_date' => 'Birth Date',
+    'orphan_gender' => 'Gender',
+    'choose_gender' => 'Choose Gender',
+    'male' => 'Male',
+    'female' => 'Female',
+    'orphan_nationality' => 'Nationality',
+    'orphan_id_number' => 'Orphan ID Number',
+    'orphan_address' => 'Orphan Address',
+    'orphan_city' => 'Orphan City',
+    
+    // Father Information
+    'father_info' => 'Father Information',
+    'father_name' => 'Father Name',
+    'father_death_date' => 'Date of Death',
+    'father_death_cause' => 'Cause of Death',
+    'father_id_number' => 'Father ID Number',
+    'father_job_before_death' => 'Job Before Death',
+    
+    // Financial Status
+    'financial_status' => 'Financial Status',
+    'monthly_income' => 'Monthly Income',
+    'income_source' => 'Income Source',
+    'family_members_count' => 'Family Members Count',
+    'financial_situation_description' => 'Financial Situation Description',
+    
+    // Housing
+    'housing_info' => 'Housing Information',
+    'housing_type' => 'Housing Type',
+    'choose_housing_type' => 'Choose Housing Type',
+    'owned' => 'Owned',
+    'rented' => 'Rented',
+    'with_relatives' => 'With Relatives',
+    'other' => 'Other',
+    'monthly_rent' => 'Monthly Rent',
+    'housing_description' => 'Housing Description',
+    
+    // Health Status
+    'health_status' => 'Health Status',
+    'has_health_issues' => 'Has Health Issues?',
+    'health_issues_description' => 'Health Issues Details',
+    'needs_medical_care' => 'Needs Medical Care?',
+    'medical_care_description' => 'Medical Care Details',
+    
+    // Education
+    'education_info' => 'Education Information',
+    'education_level' => 'Education Level',
+    'school_name' => 'School Name',
+    'needs_educational_support' => 'Needs Educational Support?',
+    'educational_needs_description' => 'Educational Support Details',
+    
+    // Additional Information
+    'additional_info' => 'Additional Information',
+    'special_circumstances' => 'Special Circumstances',
+    'additional_notes' => 'Additional Notes',
+    'support_needed' => 'Type of Support Needed',
+    
+    // Form Labels
+    'required' => 'Required',
+    'optional' => 'Optional',
+     'showtitle' => 'Orphan Sponsorship Application View',
+
+    'guardian_info' => 'Guardian Information',
+    'guardian_name' => 'Name',
+    'guardian_id_number' => 'ID Number',
+    'guardian_phone' => 'Phone Number',
+    'guardian_address' => 'Address',
+
+    'orphan_info' => 'Orphan Information',
+    'orphan_name' => 'Name',
+    'orphan_birth_date' => 'Birth Date',
+    'orphan_address' => 'Address',
+
+    'father_info' => 'Father Information',
+    'father_name' => 'Name',
+    'father_death_date' => 'Date of Death',
+    'father_death_cause' => 'Cause of Death',
+
+    'additional_info' => 'Additional Information',
+    'financial_situation_description' => 'Financial Situation',
+    'housing_type' => 'Housing Type',
+    'has_health_issues' => 'Has Health Issues',
+    'needs_educational_support' => 'Needs Educational Support',
+
+    'edit_button' => 'Edit',
+        'add_orphan' => 'Add New Orphan',
+    'name' => 'Name',
+    'guardian_phone' => 'Guardian Phone',
+    'address' => 'Address',
+    'age' => 'Age',
+    'status' => 'Status',
+    'available' => 'Available',
+    'sponsored' => 'Sponsored',
+    'save' => 'Save',
+    'errors' => 'The following errors occurred:',
+];

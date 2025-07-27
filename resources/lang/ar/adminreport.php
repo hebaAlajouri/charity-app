@@ -1,0 +1,35 @@
+<?php
+return [
+    'title' => 'التقارير',
+    'add_new' => 'إضافة تقرير جديد',
+    'table' => [
+        'number' => '#',
+        'title' => 'العنوان',
+        'category' => 'الفئة',
+        'published_at' => 'تاريخ النشر',
+        'file' => 'ملف التقرير',
+        'actions' => 'الإجراءات',
+        'view_file' => 'عرض الملف',
+        'edit' => 'تعديل',
+        'delete' => 'حذف',
+        'delete_confirm' => 'هل أنت متأكد من الحذف؟',
+    ],
+    'success_message' => 'تمت العملية بنجاح',
+        'title_create' => 'عنوان التقرير',
+    'category_create' => 'الفئة',
+    'description
+    _create' => 'الوصف',
+    'file_path_create' => 'ملف التقرير (pdf, doc, docx)',
+    'published_at_create' => 'تاريخ النشر',
+    'add_report_create' => 'إضافة تقرير جديد',
+    'save_create' => 'حفظ',
+    'edit_report' => 'تعديل التقرير',
+    'title_edit' => 'عنوان التقرير',
+    'category
+    _edit' => 'الفئة',
+    'description_edit' => 'الوصف',
+    'current_file_edit' => 'ملف التقرير الحالي',
+    'choose_file' => 'اختر ملف التقرير (pdf, doc, docx)',
+    'published_at' => 'تاريخ النشر',
+    'update_edit' => 'تحديث',
+];

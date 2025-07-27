@@ -79,4 +79,14 @@ class AdminNewsController extends Controller
 
         return redirect()->route('admin.news.index')->with('success', 'تم حذف الخبر بنجاح');
     }
+    public function getLocalizedTitleAttribute()
+{
+    return app()->getLocale() === 'en' && $this->title_en ? $this->title_en : $this->title;
+}
+
+public function getLocalizedContentAttribute()
+{
+    return app()->getLocale() === 'en' && $this->content_en ? $this->content_en : $this->content;
+}
+
 }

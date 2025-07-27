@@ -79,16 +79,6 @@ Route::get('/css/app.css', function () {
         ->header('Content-Type', 'text/css');
 })->name('css.app');
 
-
-
-
-
-
-
-
-Route::prefix('admin')->middleware(['auth'])->name('admin.')->group(function () {
-    Route::resource('reports',AdminReportController::class);
-});
 // routes/web.php
 
 
@@ -105,13 +95,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('orphan_applications', AdminOrphanApplicationController::class);
 });
 
-Route::middleware([
-    'auth',
-    \App\Http\Middleware\CheckAdmin::class,
-])->group(function () {
-    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-    
-});
+
 require __DIR__.'/auth.php';
 
 Route::middleware([SetLocale::class])->group(function () {
@@ -162,6 +146,16 @@ Route::middleware('auth')->group(function () {
       Route::resource('sponsorships', AdminSponsorshipController::class);
        Route::resource('news', AdminNewsController::class);
  Route::resource('orphan_applications', AdminOrphanApplicationController::class);
+   Route::resource('reports',AdminReportController::class);
+   
+   
+});
+Route::middleware([
+    'auth',
+    \App\Http\Middleware\CheckAdmin::class,
+])->group(function () {
+    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    
 });
 
 

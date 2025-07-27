@@ -1,0 +1,37 @@
+<?php
+
+return [
+    'title_create' => 'Add New User',
+    'name' => 'Name',
+    'email' => 'Email',
+    'phone' => 'Phone Number',
+    'address' => 'Address',
+    'password' => 'Password',
+    'role' => 'Role',
+    'role_user' => 'User',
+    'role_admin' => 'Admin',
+    'save' => 'Save',
+     'title' => 'User Management',
+    'new_user' => '+ New User',
+    'success' => 'Operation completed successfully',
+    'table' => [
+        'id' => '#',
+        'name' => 'Name',
+        'email' => 'Email',
+        'role' => 'Role',
+        'actions' => 'Actions',
+        'edit' => 'Edit',
+        'delete' => 'Delete',
+        'confirm_delete' => 'Are you sure?', ],
+     'edit_title'        => 'Edit User Information',
+    'name_edit'         => 'Name',
+    'email_edit'        => 'Email',
+    'phone_edit'        => 'Phone Number',
+    'address_edit'      => 'Address',
+    'new_password_edit' => 'New Password (optional)',
+    'role_edit'         => 'Role',
+    'user_edit'         => 'User',
+    'admin_edit'        => 'Admin',
+    'update_button'     => 'Update',
+   
+];

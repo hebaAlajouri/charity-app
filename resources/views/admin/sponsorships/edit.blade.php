@@ -1,7 +1,8 @@
 @extends('admin.layout')
 
 @section('content')
-<h1 class="text-2xl font-bold mb-4 text-[#e74c3c]">تعديل بيانات الكفالة</h1>
+<h1 class="text-2xl font-bold mb-4 text-[#e74c3c]"
+>{{ __('adminsponsorship.edit_title') }}</h1>
 
 <form action="{{ route('admin.sponsorships.update', $sponsorship->id) }}" method="POST" class="edit-form">
     @csrf
@@ -29,10 +30,10 @@
     <input type="number" name="number_of_orphans" class="w-full p-2 border rounded" min="1" value="{{ $sponsorship->number_of_orphans }}">
 
     <select name="status" class="w-full p-2 border rounded" required>
-        <option value="active" {{ $sponsorship->status === 'active' ? 'selected' : '' }}>نشطة</option>
-        <option value="ended" {{ $sponsorship->status === 'ended' ? 'selected' : '' }}>منتهية</option>
+        <option value="active" {{ $sponsorship->status === 'active' ? 'selected' : '' }}>{{ __('adminsponsorship.active') }}</option>
+        <option value="ended" {{ $sponsorship->status === 'ended' ? 'selected' : '' }}>{{ __('adminsponsorship.ended') }}</option>
     </select>
 
-    <button type="submit" class="btn-login">تحديث</button>
+    <button type="submit" class="btn-login">{{ __('adminsponsorship.update') }}</button>
 </form>
 @endsection
