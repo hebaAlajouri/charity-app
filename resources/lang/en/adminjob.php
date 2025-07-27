@@ -16,7 +16,7 @@ return [
     'edit' => 'Edit',
     'delete' => 'Delete',
     'confirm_delete' => 'Are you sure you want to delete?',
-    'add_new_job' => 'Add New Job',
+     'edit_title' => 'Edit Job',
     'title' => 'Job Title',
     'location' => 'Location (Optional)',
     'description' => 'Job Description',
@@ -28,5 +28,5 @@ return [
     'is_active' => 'Status',
     'active' => 'Active',
     'inactive' => 'Inactive',
-    'submit' => 'Save',
+    'submit' => 'Update',
 ];

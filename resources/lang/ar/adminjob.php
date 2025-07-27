@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'الوظائف',
+ 'title' => 'الوظائف',
     'add_new' => 'إضافة وظيفة جديدة',
     'success' => 'تمت العملية بنجاح',
     'id' => '#',
@@ -16,7 +16,7 @@ return [
     'edit' => 'تعديل',
     'delete' => 'حذف',
     'confirm_delete' => 'هل أنت متأكد من الحذف؟',
-    'add_new_job' => 'إضافة وظيفة جديدة',
+    'edit_title' => 'تعديل الوظيفة',
     'title' => 'عنوان الوظيفة',
     'location' => 'الموقع (اختياري)',
     'description' => 'وصف الوظيفة',
@@ -24,9 +24,9 @@ return [
     'full_time' => 'دوام كامل',
     'part_time' => 'دوام جزئي',
     'volunteer' => 'متطوع',
-    'deadline' => 'الموعد النهائي',
+    'deadline' => 'تاريخ الانتهاء',
     'is_active' => 'الحالة',
     'active' => 'نشطة',
     'inactive' => 'غير نشطة',
-    'submit' => 'حفظ',
+    'submit' => 'تحديث'
 ];

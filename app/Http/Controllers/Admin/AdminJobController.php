@@ -40,20 +40,22 @@ class AdminJobController extends Controller
         return view('admin.jobs.edit', compact('job'));
     }
 
-    public function update(Request $request, Job $job)
+   public function update(Request $request, Job $job)
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'location' => 'nullable|string|max:255',
-            'description' => 'required|string',
-            'type' => 'required|in:دوام كامل,دوام جزئي,متطوع',
-            'deadline' => 'nullable|date',
-            'is_active' => 'required|boolean',
-        ]);
+       $locale = app()->getLocale();
+$fieldSuffix = $locale === 'en' ? '_en' : '';
 
-        $job->update($request->all());
-
-        return redirect()->route('admin.jobs.index')->with('success', 'تم تحديث الوظيفة بنجاح');
+$job->update([
+    'title' => $locale === 'en' ? $job->title : $request->title,
+    'title_en' => $locale === 'en' ? $request->title : $job->title_en,
+    'location' => $locale === 'en' ? $job->location : $request->location,
+    'location_en' => $locale === 'en' ? $request->location : $job->location_en,
+    'description' => $locale === 'en' ? $job->description : $request->description,
+    'description_en' => $locale === 'en' ? $request->description : $job->description_en,
+    'type' => $request->type,
+    'deadline' => $request->deadline,
+    'is_active' => $request->is_active,
+]);
     }
 
     public function destroy(Job $job)
