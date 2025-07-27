@@ -31,14 +31,14 @@
                 <a href="{{ route('lang.switch', 'en') }}" class="{{ app()->getLocale() == 'en' ? 'font-bold text-[#e74c3c]' : 'text-gray-600 hover:text-[#e74c3c]' }} transition-colors">{{ __('nav.english') }}</a>
             </div>
 
-            <!-- Auth Section -->
+         <div class="nav-auth hidden md:flex items-center gap-3">
             @auth
-                <x-dropdown align="{{ app()->getLocale() == 'ar' ? 'right' : 'left' }}" width="48">
+                <x-dropdown align="left" width="48">
                     <x-slot name="trigger">
-                        <button class="btn-login flex items-center gap-2 hover:text-[#e74c3c] transition-colors">
+                        <button class="btn-login flex items-center gap-2">
                             <i class="fas fa-user-circle text-xl text-[#e74c3c]"></i>
                             <span class="text-sm font-semibold">{{ Auth::user()->name }}</span>
-                            <svg class="w-4 h-4 {{ app()->getLocale() == 'ar' ? 'rotate-180' : '' }}" fill="currentColor" viewBox="0 0 20 20">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                             </svg>
                         </button>
@@ -46,21 +46,21 @@
 
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('nav.profile') }}
+                            {{ __('الملف الشخصي') }}
                         </x-dropdown-link>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <x-dropdown-link :href="route('logout')"
                                 onclick="event.preventDefault(); this.closest('form').submit();">
-                                {{ __('nav.logout') }}
+                                {{ __('تسجيل الخروج') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>
                 </x-dropdown>
             @else
-                <a href="{{ route('login') }}" class="btn-login flex items-center gap-2 hover:text-[#e74c3c] transition-colors">
-                    <i class="fas fa-sign-in-alt text-[#e74c3c] {{ app()->getLocale() == 'ar' ? 'order-2' : 'order-1' }}"></i>
-                    <span class="{{ app()->getLocale() == 'ar' ? 'order-1' : 'order-2' }}">{{ __('nav.login') }}</span>
+                <a href="{{ route('login') }}" class="btn-login flex items-center gap-2">
+                    <i class="fas fa-sign-in-alt text-[#e74c3c]"></i>
+                    <span>تسجيل الدخول</span>
                 </a>
             @endauth
         </div>

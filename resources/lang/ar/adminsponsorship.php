@@ -18,7 +18,8 @@ return [
     'create_title' => 'اضف تبرع',
         'pick' => 'اختر',
                 'pick_orphan' => '  يتيم اختر',
-
-
+                'sponsorship_type' => 'نوع الكفالة',
+'sponsored_for' => 'كفالة عن',
+'save' => 'حفظ',
 
 ];

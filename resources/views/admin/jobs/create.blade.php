@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="{{ app()->getLocale() === 'ar' ? 'text-right' : 'text-left' }}">
-    <h1 class="text-2xl font-bold mb-4 text-[#e74c3c]">{{ __('adminjob.add_new_job') }}</h1>
+    <h1 class="text-2xl font-bold mb-4 text-[#e74c3c]">{{ __('adminjob.add_new') }}</h1>
 
     <form action="{{ route('admin.jobs.store') }}" method="POST" class="edit-form">
         @csrf
@@ -16,11 +16,25 @@
         @error('title') <p class="text-red-600">{{ $message }}</p> @enderror
 
         <input 
+            name="title_en" 
+            placeholder="Title (English)" 
+            value="{{ old('title_en') }}" 
+            class="w-full p-2 border rounded">
+        @error('title_en') <p class="text-red-600">{{ $message }}</p> @enderror
+
+        <input 
             name="location" 
             placeholder="{{ __('adminjob.location') }}" 
             value="{{ old('location') }}" 
             class="w-full p-2 border rounded {{ app()->getLocale() === 'ar' ? 'text-right' : 'text-left' }}">
         @error('location') <p class="text-red-600">{{ $message }}</p> @enderror
+
+        <input 
+            name="location_en" 
+            placeholder="Location (English)" 
+            value="{{ old('location_en') }}" 
+            class="w-full p-2 border rounded">
+        @error('location_en') <p class="text-red-600">{{ $message }}</p> @enderror
 
         <textarea 
             name="description" 
@@ -28,6 +42,13 @@
             class="w-full p-2 border rounded {{ app()->getLocale() === 'ar' ? 'text-right' : 'text-left' }}" 
             required>{{ old('description') }}</textarea>
         @error('description') <p class="text-red-600">{{ $message }}</p> @enderror
+
+        <label>{{ __('adminjob.description') }} (EN)</label>
+        <textarea 
+            name="description_en" 
+            placeholder="{{ __('adminjob.description') }} EN" 
+            class="w-full p-2 border rounded">{{ old('description_en') }}</textarea>
+        @error('description_en') <p class="text-red-600">{{ $message }}</p> @enderror
 
         <select name="type" class="w-full p-2 border rounded" required>
             <option value="دوام كامل" {{ old('type') == 'دوام كامل' ? 'selected' : '' }}>{{ __('adminjob.full_time') }}</option>

@@ -19,37 +19,50 @@
     @csrf
     @method('PUT')
 
-    <input name="name" 
-           value="{{ old('name', $project->name) }}" 
-           placeholder="{{ __('adminproject.project_name') }}" 
-           class="w-full p-2 border rounded" required>
+    <!-- Arabic Name -->
+    <input name="name_ar"
+           value="{{ old('name_ar', $project->name_ar) }}"
+           placeholder="{{ __('adminproject.project_name_ar') }}"
+           class="w-full p-2 border rounded mb-2" required>
 
-    <input name="code" 
-           value="{{ old('code', $project->code) }}" 
-           placeholder="{{ __('adminproject.project_code') }}" 
-           class="w-full p-2 border rounded" required>
+    <!-- English Name -->
+    <input name="name_en"
+           value="{{ old('name_en', $project->name_en) }}"
+           placeholder="{{ __('adminproject.project_name_en') }}"
+           class="w-full p-2 border rounded mb-2">
 
-    <input name="goal_amount" 
-           value="{{ old('goal_amount', $project->goal_amount) }}" 
-           placeholder="{{ __('adminproject.goal_amount') }}" 
-           class="w-full p-2 border rounded" required>
+    <input name="code"
+           value="{{ old('code', $project->code) }}"
+           placeholder="{{ __('adminproject.project_code') }}"
+           class="w-full p-2 border rounded mb-2" required>
 
-    <input name="raised_amount" 
-           value="{{ old('raised_amount', $project->raised_amount) }}" 
-           placeholder="{{ __('adminproject.raised_amount') }}" 
-           class="w-full p-2 border rounded">
+    <input name="goal_amount"
+           value="{{ old('goal_amount', $project->goal_amount) }}"
+           placeholder="{{ __('adminproject.goal_amount') }}"
+           class="w-full p-2 border rounded mb-2" required>
 
-    <input name="icon" 
-           value="{{ old('icon', $project->icon) }}" 
-           placeholder="{{ __('adminproject.fontawesome_icon') }}" 
-           class="w-full p-2 border rounded">
+    <input name="raised_amount"
+           value="{{ old('raised_amount', $project->raised_amount) }}"
+           placeholder="{{ __('adminproject.raised_amount') }}"
+           class="w-full p-2 border rounded mb-2">
 
-    <input name="image" type="file" class="w-full p-2 border rounded" 
+    <input name="icon"
+           value="{{ old('icon', $project->icon) }}"
+           placeholder="{{ __('adminproject.fontawesome_icon') }}"
+           class="w-full p-2 border rounded mb-2">
+
+    <input name="image" type="file" class="w-full p-2 border rounded mb-2"
            aria-label="{{ __('adminproject.project_image') }}">
 
-    <textarea name="description" 
-              placeholder="{{ __('adminproject.project_description') }}" 
-              class="w-full p-2 border rounded">{{ old('description', $project->description) }}</textarea>
+    <!-- Arabic Description -->
+    <textarea name="description"
+              placeholder="{{ __('adminproject.project_description_ar') }}"
+              class="w-full p-2 border rounded mb-2">{{ old('description', $project->description) }}</textarea>
+
+    <!-- English Description -->
+    <textarea name="description_en"
+              placeholder="{{ __('adminproject.project_description_en') }}"
+              class="w-full p-2 border rounded mb-4">{{ old('description_en', $project->description_en) }}</textarea>
 
     <button type="submit" class="btn-login">
         {{ __('adminproject.update') }}

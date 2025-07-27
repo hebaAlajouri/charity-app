@@ -506,7 +506,7 @@
                         <i class="fas fa-user-tie"></i>
                     </div>
                     <h2 class="job-title">{{ app()->getLocale() === 'ar' ? $job->title : ($job->title_en ?? $job->title) }}</h2>
-                    <p class="job-subtitle">{{ __('careersshow.join_our_team') }}</p>
+              
                 </div>
 
                 <!-- Job Info Grid -->

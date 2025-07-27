@@ -7,11 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Report extends Model
 {
     protected $fillable = [
-        'title',
-        'category',
-        'description',
-        'file_path',
-        'published_at',
+      'title',
+    'title_en',
+    'category',
+    'category_en',
+    'description',
+    'description_en',
+    'file_path',
+    'published_at',
     ];
 
     protected $casts = [

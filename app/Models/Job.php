@@ -11,12 +11,15 @@ class Job extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title',
-        'location',
-        'description',
-        'type',
-        'deadline',
-        'is_active',
+         'title',
+    'title_en',
+    'location',
+    'location_en',
+    'description',
+    'description_en',
+    'type',
+    'deadline',
+    'is_active',
     ];
 
     protected $casts = [

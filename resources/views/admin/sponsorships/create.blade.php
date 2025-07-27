@@ -28,16 +28,16 @@
         @endforeach
     </select>
 
-    <input name="sponsorship_type" class="w-full p-2 border rounded" placeholder="ع الكفالة">
+    <input name="sponsorship_type" class="w-full p-2 border rounded" placeholder="{{ __('adminsponsorship.sponsorship_type') }}">
     <input type="date" name="start_date" class="w-full p-2 border rounded">
-    <input name="sponsored_for" class="w-full p-2 border rounded" placeholder="مكفول من أجل">
+    <input name="sponsored_for" class="w-full p-2 border rounded" placeholder="{{ __('adminsponsorship.sponsored_for') }}">
     <input type="number" name="number_of_orphans" class="w-full p-2 border rounded" min="1" value="1">
 
     <select name="status" class="w-full p-2 border rounded" required>
-        <option value="active">نشطة</option>
-        <option value="ended">منتهية</option>
+        <option value="active">{{ __('adminsponsorship.active') }}</option>
+        <option value="ended">{{ __('adminsponsorship.ended') }}</option>
     </select>
 
-    <button type="submit" class="btn-login">حفظ</button>
+    <button type="submit" class="btn-login">{{ __('adminsponsorship.save') }}</button>
 </form>
 @endsection

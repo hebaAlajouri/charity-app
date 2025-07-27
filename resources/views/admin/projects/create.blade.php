@@ -15,19 +15,28 @@
 
 <form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data" class="edit-form">
     @csrf
-    <input name="name" placeholder="{{ __('adminproject.name') }}" class="w-full p-2 border rounded" required>
 
-    <input name="code" placeholder="{{ __('adminproject.code') }}" class="w-full p-2 border rounded" required>
+    <!-- Arabic Name -->
+    <input name="name_ar" placeholder="{{ __('adminproject.name_ar') }}" class="w-full p-2 border rounded" value="{{ old('name_ar') }}" required>
 
-    <input name="goal_amount" placeholder="{{ __('adminproject.goal_amount') }}" class="w-full p-2 border rounded" required>
+    <!-- English Name -->
+    <input name="name_en" placeholder="{{ __('adminproject.name_en') }}" class="w-full p-2 border rounded" value="{{ old('name_en') }}">
 
-    <input name="raised_amount" placeholder="{{ __('adminproject.raised_amount') }}" class="w-full p-2 border rounded">
+    <input name="code" placeholder="{{ __('adminproject.code') }}" class="w-full p-2 border rounded" value="{{ old('code') }}" required>
 
-    <input name="icon" placeholder="{{ __('adminproject.icon') }}" class="w-full p-2 border rounded">
+    <input name="goal_amount" placeholder="{{ __('adminproject.goal_amount') }}" class="w-full p-2 border rounded" value="{{ old('goal_amount') }}" required>
+
+    <input name="raised_amount" placeholder="{{ __('adminproject.raised_amount') }}" class="w-full p-2 border rounded" value="{{ old('raised_amount') }}">
+
+    <input name="icon" placeholder="{{ __('adminproject.icon') }}" class="w-full p-2 border rounded" value="{{ old('icon') }}">
 
     <input name="image" type="file" class="w-full p-2 border rounded">
 
-    <textarea name="description" placeholder="{{ __('adminproject.description') }}" class="w-full p-2 border rounded"></textarea>
+    <!-- Arabic Description -->
+    <textarea name="description" placeholder="{{ __('adminproject.description') }}" class="w-full p-2 border rounded">{{ old('description') }}</textarea>
+
+    <!-- English Description -->
+    <textarea name="description_en" placeholder="{{ __('adminproject.description') }} (EN)" class="w-full p-2 border rounded">{{ old('description_en') }}</textarea>
 
     <button type="submit" class="btn-login">{{ __('adminproject.save') }}</button>
 </form>

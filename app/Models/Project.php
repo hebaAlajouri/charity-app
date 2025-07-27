@@ -11,8 +11,15 @@ class Project extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'code', 'goal_amount', 'raised_amount',
-        'icon', 'image', 'description',
+         'name_ar',
+    'name_en',
+    'code',
+    'goal_amount',
+    'raised_amount',
+    'icon',
+    'image',
+    'description',
+    'description_en', // optional
     ];
 
     protected $casts = [

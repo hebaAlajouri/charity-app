@@ -19,56 +19,62 @@ class AdminProjectController extends Controller
         return view('admin.projects.create');
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name'         => 'required|string|max:255',
-            'code'         => 'required|string|max:255|unique:projects',
-            'goal_amount'  => 'required|numeric',
-            'raised_amount'=> 'nullable|numeric',
-            'icon'         => 'nullable|string',
-            'image'        => 'nullable|image',
-            'description'  => 'nullable|string',
-        ]);
+public function store(Request $request)
+{
+    $request->validate([
+        'name_ar'       => 'required|string|max:255',
+        'name_en'       => 'nullable|string|max:255',
+        'code'          => 'required|string|max:255|unique:projects',
+        'goal_amount'   => 'required|numeric',
+        'raised_amount' => 'nullable|numeric',
+        'icon'          => 'nullable|string',
+        'image'         => 'nullable|image',
+        'description'   => 'nullable|string',
+        'description_en'   => 'nullable|string',
+    ]);
 
-        $data = $request->except('image');
+    $data = $request->except('image');
 
-        if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('projects', 'public');
-        }
-
-        Project::create($data);
-
-        return redirect()->route('admin.projects.index')->with('success', 'تم إضافة المشروع بنجاح');
+    if ($request->hasFile('image')) {
+        $data['image'] = $request->file('image')->store('projects', 'public');
     }
+
+    Project::create($data);
+
+    return redirect()->route('admin.projects.index')->with('success', 'تم إضافة المشروع بنجاح');
+}
+
 
     public function edit(Project $project)
     {
         return view('admin.projects.edit', compact('project'));
     }
 
-    public function update(Request $request, Project $project)
-    {
-        $request->validate([
-            'name'         => 'required|string|max:255',
-            'code'         => 'required|string|max:255|unique:projects,code,' . $project->id,
-            'goal_amount'  => 'required|numeric',
-            'raised_amount'=> 'nullable|numeric',
-            'icon'         => 'nullable|string',
-            'image'        => 'nullable|image',
-            'description'  => 'nullable|string',
-        ]);
+public function update(Request $request, Project $project)
+{
+    $request->validate([
+        'name_ar'       => 'required|string|max:255',
+        'name_en'       => 'nullable|string|max:255',
+        'code'          => 'required|string|max:255|unique:projects,code,' . $project->id,
+        'goal_amount'   => 'required|numeric',
+        'raised_amount' => 'nullable|numeric',
+        'icon'          => 'nullable|string',
+        'image'         => 'nullable|image',
+        'description'   => 'nullable|string',
+          'description_en'   => 'nullable|string',
+    ]);
 
-        $data = $request->except('image');
+    $data = $request->except('image');
 
-        if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('projects', 'public');
-        }
-
-        $project->update($data);
-
-        return redirect()->route('admin.projects.index')->with('success', 'تم تحديث المشروع بنجاح');
+    if ($request->hasFile('image')) {
+        $data['image'] = $request->file('image')->store('projects', 'public');
     }
+
+    $project->update($data);
+
+    return redirect()->route('admin.projects.index')->with('success', 'تم تحديث المشروع بنجاح');
+}
+
 
     public function destroy(Project $project)
     {

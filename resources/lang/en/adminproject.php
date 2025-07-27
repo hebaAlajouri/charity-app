@@ -38,4 +38,6 @@ return [
     'description' => 'Project Description',
     'save' => 'Save',
     'validation_errors' => 'Some errors occurred:',
+       'name_ar' =>'project name in arabic',
+    'name_en' =>'project name in english',
 ];

@@ -18,8 +18,8 @@ return [
     'create_title' => 'Create a sponsorship',
   'pick' => 'pick one',
   'pick_orphan' => 'pick orphan ',
-  
-
-
+  'sponsorship_type' => 'sponsorship type',
+'sponsored_for' => 'sponsored for',
+'save' => 'save',
 
 ];

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -8,29 +9,39 @@ use Illuminate\Http\Request;
 class AdminJobController extends Controller
 {
     public function index()
-{
-    $jobs = Job::orderBy('created_at', 'desc')->get();
-    return view('admin.jobs.index', compact('jobs'));
-}
-
-
-    public function create()
     {
-        return view('admin.jobs.create');
+        $jobs = Job::orderBy('created_at', 'desc')->get();
+        return view('admin.jobs.index', compact('jobs'));
     }
-
+public function create()
+{
+    return view('admin.jobs.create');
+}
     public function store(Request $request)
     {
         $request->validate([
             'title' => 'required|string|max:255',
+            'title_en' => 'nullable|string|max:255',
             'location' => 'nullable|string|max:255',
+            'location_en' => 'nullable|string|max:255',
             'description' => 'required|string',
+            'description_en' => 'nullable|string',
             'type' => 'required|in:دوام كامل,دوام جزئي,متطوع',
             'deadline' => 'nullable|date',
             'is_active' => 'required|boolean',
         ]);
 
-        Job::create($request->all());
+        Job::create([
+            'title' => $request->title,
+            'title_en' => $request->title_en,
+            'location' => $request->location,
+            'location_en' => $request->location_en,
+            'description' => $request->description,
+            'description_en' => $request->description_en,
+            'type' => $request->type,
+            'deadline' => $request->deadline,
+            'is_active' => $request->is_active,
+        ]);
 
         return redirect()->route('admin.jobs.index')->with('success', 'تم إضافة الوظيفة بنجاح');
     }
@@ -40,29 +51,38 @@ class AdminJobController extends Controller
         return view('admin.jobs.edit', compact('job'));
     }
 
-   public function update(Request $request, Job $job)
+    public function update(Request $request, Job $job)
     {
-       $locale = app()->getLocale();
-$fieldSuffix = $locale === 'en' ? '_en' : '';
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'title_en' => 'nullable|string|max:255',
+            'location' => 'nullable|string|max:255',
+            'location_en' => 'nullable|string|max:255',
+            'description' => 'required|string',
+            'description_en' => 'nullable|string',
+            'type' => 'required|in:دوام كامل,دوام جزئي,متطوع',
+            'deadline' => 'nullable|date',
+            'is_active' => 'required|boolean',
+        ]);
 
-$job->update([
-    'title' => $locale === 'en' ? $job->title : $request->title,
-    'title_en' => $locale === 'en' ? $request->title : $job->title_en,
-    'location' => $locale === 'en' ? $job->location : $request->location,
-    'location_en' => $locale === 'en' ? $request->location : $job->location_en,
-    'description' => $locale === 'en' ? $job->description : $request->description,
-    'description_en' => $locale === 'en' ? $request->description : $job->description_en,
-    'type' => $request->type,
-    'deadline' => $request->deadline,
-    'is_active' => $request->is_active,
-]);
+        $job->update([
+            'title' => $request->title,
+            'title_en' => $request->title_en,
+            'location' => $request->location,
+            'location_en' => $request->location_en,
+            'description' => $request->description,
+            'description_en' => $request->description_en,
+            'type' => $request->type,
+            'deadline' => $request->deadline,
+            'is_active' => $request->is_active,
+        ]);
+
+        return redirect()->route('admin.jobs.index')->with('success', 'تم تحديث الوظيفة بنجاح');
     }
 
     public function destroy(Job $job)
     {
         $job->delete();
-
         return redirect()->route('admin.jobs.index')->with('success', 'تم حذف الوظيفة بنجاح');
     }
-    
 }
