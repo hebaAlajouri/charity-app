@@ -17,7 +17,7 @@ return [
     'content_placeholder' => 'Content',
     'update_button' => 'Update',
      'add_news'     => 'Add News',
-    'title'        => 'Title',
+    'title'        => 'News',
     'image'        => 'Image',
     'content'      => 'Content',
     'save'         => 'Save',
